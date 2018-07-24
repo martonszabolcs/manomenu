@@ -403,8 +403,6 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
          
 
   decelerationRate="normal"
-  startInLoadingState={true}
-
   javaScriptEnabledAndroid={true}
   ref={'webview'} source={{ html: this.state.HTML, baseUrl:''}} scalesPageToFit={true} style={{width:width, backgroundColor:'transparent', height:height}} />
         </View>

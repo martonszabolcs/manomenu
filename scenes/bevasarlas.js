@@ -98,15 +98,34 @@ export default class Bevasarlas extends Component<{}> {
     this.modalVisible(false);
   }
 
+  mod(rowData, rowID) {
+    this.setState({
+      hasonlitas: rowData.title,
+      modTitle: rowData.title,
+      modMenny: rowData.value,
+      modSzam: rowID,
+      modalVisible2: true
+    });
+  }
+
   saveNewItem2() {
     let list = this.state.lista;
     var i = this.state.modSzam;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].title == this.state.hasonlitas){
+        list[i] = {title: this.state.modTitle, value: this.state.modMenny }
+      }
+      }
+      setTimeout(() => {
+      console.log(list)
 
-    list.splice(i, 1);
-    ids = { title: this.state.modTitle, value: this.state.modMenny }; //new value
-    var lists = this.state.lista.concat(ids);
+    },2000)
 
-    this.setState({ lista: lists });
+    //list.splice(i, 1);
+    /*ids = { title: this.state.modTitle, value: this.state.modMenny }; //new value
+    var lists = this.state.lista.concat(ids);*/
+
+    this.setState({ lista: list });
     console.log(this.state.lista);
     setTimeout(() => {
       this.saveList();
@@ -438,14 +457,7 @@ export default class Bevasarlas extends Component<{}> {
     this.setState({ lista: newArray });
   };
 
-  mod(rowData, rowID) {
-    this.setState({
-      modTitle: rowData.title,
-      modMenny: rowData.value,
-      modSzam: rowID,
-      modalVisible2: true
-    });
-  }
+  
   closeRow(rowMap, rowId) {
     if (rowMap[rowId]) {
       rowMap[rowId].closeRow();
@@ -454,7 +466,8 @@ export default class Bevasarlas extends Component<{}> {
 
   render() {
     var addFlightLeft = (width - 50) / 2;
-    var addFlightTop = height*0.8;
+              
+    var addFlightTop = height / 12 + 5;
     var index = 1;
     var facebook = "https://www.facebook.com/";
     var instagram = "https://www.instagram.com/";
@@ -478,7 +491,7 @@ export default class Bevasarlas extends Component<{}> {
             underlayColor="transparent"
             style={[
               styles.newFlight,
-              { top: addFlightTop, left: addFlightLeft }
+              { bottom: addFlightTop, left: addFlightLeft }
             ]}
           >
             <Image
@@ -844,7 +857,7 @@ export default class Bevasarlas extends Component<{}> {
             underlayColor="transparent"
             style={[
               styles.newFlight,
-              { top: addFlightTop, left: addFlightLeft }
+              { bottom: addFlightTop, left: addFlightLeft }
             ]}
           >
             <Image

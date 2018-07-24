@@ -292,8 +292,6 @@ export default class ReceptekHTML extends Component<{}> {
          
 
   decelerationRate="normal"
-  startInLoadingState={true}
-
   javaScriptEnabledAndroid={true}
   ref={'webview'} source={{ html: this.state.content.content, baseUrl:''}} scalesPageToFit={true} style={{width:width, height:height}} />
         </View>

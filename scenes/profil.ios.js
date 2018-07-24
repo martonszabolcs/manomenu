@@ -298,12 +298,11 @@ export default class Profil extends Component<{}> {
             >
               <Image
                 source={require("../src/nyil_feher.png")}
-                style={{
-                  width: 31 / 3,
-                  height: 58 / 3,
-                  zIndex: 100,
-                  marginLeft: 10,
-                  marginRight: 10
+               style={{
+                  width: 31 / 2.6,
+                  height: 58 / 2.6,
+                  zIndex: 2312321312,
+                  left: 20
                 }}
               />
             </TouchableOpacity>
