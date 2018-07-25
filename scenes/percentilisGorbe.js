@@ -88,17 +88,23 @@ export default class Perc extends React.Component {
   percentilisMagassag() {
     if (this.state.gender == "lany") {
       return (
+
+    <View>
         <Text style={{ color: "gray", marginBottom: 5 }}>
           {" "}
           Magassági görbe cm (lány){" "}
         </Text>
+        </View>
       );
     } else {
       return (
+
+    <View>
         <Text style={{ color: "gray", marginBottom: 5 }}>
           {" "}
           Magassági görbe cm (fiú){" "}
         </Text>
+        </View>
       );
     }
   }
@@ -328,7 +334,6 @@ export default class Perc extends React.Component {
   }
 
   modal2() {
-    index = 1;
     return (
       <View style={{ marginTop: 0 }}>
         <Modal
@@ -864,10 +869,12 @@ export default class Perc extends React.Component {
             customValueRenderer={(index, point) => {
               if (point.x == "Itt van") {
                 return (
+                    <View>
                   <Text style={{ textAlign: "center", fontSize: 30 }}>
                     {" "}
                     11" "}
                   </Text>
+                  </View>
                 );
               }
             }}
@@ -900,10 +907,13 @@ export default class Perc extends React.Component {
             customValueRenderer={(index, point) => {
               if (point.x == "Itt van") {
                 return (
+                    <View>
+
                   <Text style={{ textAlign: "center", fontSize: 30 }}>
                     {" "}
                     11" "}
                   </Text>
+                  </View>
                 );
               }
             }}
@@ -917,19 +927,31 @@ export default class Perc extends React.Component {
   magassag() {
     if (this.state.oldal == "magassag") {
       return (
+        <View>
+
         <Text style={[styles.HOME, { color: "white" }]}>{"Magasság"}</Text>
+        </View>
       );
     } else {
       return (
+        <View>
+
         <Text style={[styles.HOME, { color: "#008c82" }]}>{"Magasság"}</Text>
+        </View>
       );
     }
   }
   suly() {
     if (this.state.oldal == "suly") {
-      return <Text style={[styles.HOME, { color: "white" }]}>{"Súly"}</Text>;
+      return (
+        <View>
+        <Text style={[styles.HOME, { color: "white" }]}>{"Súly"}</Text>
+        </View>);
     } else {
-      return <Text style={[styles.HOME, { color: "#008c82" }]}>{"Súly"}</Text>;
+      return (
+        <View>
+        <Text style={[styles.HOME, { color: "#008c82" }]}>{"Súly"}</Text>
+        </View>);
     }
   }
 
@@ -971,7 +993,8 @@ export default class Perc extends React.Component {
                   width: 31 / 2.6,
                   height: 58 / 2.6,
                   zIndex: 2312321312,
-                  left: 20
+                  left: 20,
+                  top:20
                 }}
               />
             </View>
@@ -1214,7 +1237,6 @@ export default class Perc extends React.Component {
               rightOpenValue={0}
             />
           </View>
-          ); } }
           <View style={{ height: 200 }} />
         </ScrollView>
       </View>
