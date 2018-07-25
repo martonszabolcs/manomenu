@@ -809,12 +809,41 @@ export default class Home extends Component<{}> {
           color: "black"
         }
       ]};
+
+      var percadatok = [
+        {date:"__", honap: 0, magassag:"55", suly: "6.54"},
+        {date:"__", honap: 1, magassag:"__", suly: "__"},
+        {date:"__", honap: 2, magassag:"__", suly: "__"},
+        {date:"__", honap: 3, magassag:"__", suly: "__"},
+        {date:"__", honap: 4, magassag:"__", suly: "__"},
+        {date:"__", honap: 5, magassag:"__", suly: "__"},
+        {date:"__", honap: 6, magassag:"__", suly: "__"},
+        {date:"__", honap: 7, magassag:"__", suly: "__"},
+        {date:"__", honap: 8, magassag:"__", suly: "__"},
+        {date:"__", honap: 9, magassag:"__", suly: "__"},
+        {date:"__", honap: 10, magassag:"__", suly: "__"},
+        {date:"__", honap: 11, magassag:"__", suly: "__"},
+        {date:"__", honap: 12, magassag:"__", suly: "__"},
+        {date:"__", honap: 13, magassag:"__", suly: "__"},
+        {date:"__", honap: 14, magassag:"__", suly: "__"},
+        {date:"__", honap: 15, magassag:"__", suly: "__"},
+        {date:"__", honap: 16, magassag:"__", suly: "__"},
+        {date:"__", honap: 17, magassag:"__", suly: "__"},
+        {date:"__", honap: 18, magassag:"__", suly: "__"},
+        {date:"__", honap: 19, magassag:"__", suly: "__"},
+        {date:"__", honap: 20, magassag:"__", suly: "__"},
+        {date:"__", honap: 21, magassag:"__", suly: "__"},
+        {date:"__", honap: 22, magassag:"__", suly: "__"},
+        {date:"__", honap: 23, magassag:"__", suly: "__"},
+        {date:"__", honap: 24, magassag:"__", suly: "__"},
+      ];
      AsyncStorage.getItem('percentilismindenadat', (err, result) => {
             if (err) {
 
             } else {
                 if (result == null) {
                 AsyncStorage.setItem('percentilismindenadat', JSON.stringify(data));
+                AsyncStorage.setItem('@menu:percAdatok', JSON.stringify(percadatok));
                     
                 }
             }

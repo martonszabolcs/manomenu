@@ -11,6 +11,7 @@ import {
   Modal,
   Picker,
   TextInput,
+  Alert,
   ListView,
   AsyncStorage
 } from "react-native";
@@ -32,6 +33,8 @@ export default class Perc extends React.Component {
       modalVisible2: false,
       lista: [],
       honapi:1,
+      magassagi:"",
+      sulyi:"",
       magassag: this.props.gyerek.magassag,
       gender: this.props.gyerek.nem,
       suly: this.props.gyerek.suly,
@@ -130,6 +133,8 @@ export default class Perc extends React.Component {
 
   async saveNewItem() {
 
+    if (this.state.magassagi != "" && this.state.honapi && this.state.sulyi != ""){
+
     if (this.state.gender == "lany") {
         console.log("gLength")
       var data = this.state.gLength;
@@ -182,14 +187,15 @@ export default class Perc extends React.Component {
       }
     }
 
+    var lista = this.state.lista;
 
-
-    var newArrayForm = {
-      magassag: this.state.magassagi,
+    
+    lista[honap] = {magassag: this.state.magassagi,
       suly: this.state.sulyi,
       honap: this.state.honapi,
-      date: this.state.datei
-    };
+      date: this.state.datei}
+
+    
     setTimeout(() => {
     var perc = {
       bHeight: this.state.bHeight,
@@ -205,12 +211,7 @@ export default class Perc extends React.Component {
     },1000)
     
 
-
-
-    console.log(newArrayForm);
-    var lists = this.state.lista.concat(newArrayForm);
-
-    this.setState({ lista: lists });
+    this.setState({ lista: lista });
     console.log(this.state.lista);
     setTimeout(() => {
       this.saveList();
@@ -223,7 +224,60 @@ export default class Perc extends React.Component {
       date: ""
     });
 
-    this.modalVisible(false);
+    this.modalVisible2(false);
+  } else {
+    alert("Kérlek, minden adatot tölts ki!")
+  }
+  }
+  onChanged(text) {
+   let newText = "";
+    let numbers = "0123456789.";
+
+    for (var i = 0; i < text.length; i++) {
+      if (numbers.indexOf(text[i]) > -1) {
+        newText = newText + text[i];
+      } else {
+        textIn = text.slice(0, -1);
+        console.log(textIn)
+        Alert.alert(
+  'Hiba',
+  'Kérlek számot írj be! Ha tört számot szeretnél beírni a vessző(,) helyett pontot(.) írj be!',
+  [
+    {text: 'OK', onPress: () => 
+        this.setState({magassagi:textIn})},
+  ],
+  { cancelable: false }
+)
+        
+
+      }
+    }
+    this.setState({ magassagi: text });
+  }
+ onChanged2(text) {
+    let newText = "";
+    let numbers = "0123456789.";
+
+    for (var i = 0; i < text.length; i++) {
+      if (numbers.indexOf(text[i]) > -1) {
+        newText = newText + text[i];
+      } else {
+        textIn = text.slice(0, -1);
+        console.log(textIn)
+        Alert.alert(
+  'Hiba',
+  'Kérlek számot írj be! Ha tört számot szeretnél beírni a vessző(,) helyett pontot(.) írj be!',
+  [
+    {text: 'OK', onPress: () => 
+        this.setState({sulyi:textIn})},
+  ],
+  { cancelable: false }
+)
+        
+
+      }
+    }
+    this.setState({ sulyi: text });
   }
 
   saveNewItem2() {
@@ -273,14 +327,14 @@ export default class Perc extends React.Component {
     this.saveList();
   }
 
-  modal() {
+  modal2() {
     index = 1;
     return (
       <View style={{ marginTop: 0 }}>
         <Modal
           animationType="fade"
           transparent={true}
-          visible={this.state.modalVisible}
+          visible={this.state.modalVisible2}
           onRequestClose={() => {
             console.log("Modal has been closed.");
           }}
@@ -314,57 +368,27 @@ export default class Perc extends React.Component {
                 <View
                   style={{
                     width: width - 50,
-                    height: height / 3,
+                    padding:20,
                     flexDirection: "column",
                     justifyContent: "center"
                   }}
                 >
+                  
                   <Text
                     numberOfLines={1}
                     style={[
                       styles.cim,
                       {
-                        color: "gray",
+                        color: "black",
                         marginTop: 0,
                         textAlign: "center",
-                        fontSize: 18
+                        fontSize: 30
                       }
                     ]}
                   >
-                    {"Baba kora"}
+                    {this.state.honapi}{" Hónapos"}
                   </Text>
-                  <Picker
-                    selectedValue={this.state.honapi}
-                    style={{ height: height / 4, width: width - 50 }}
-                    onValueChange={(itemValue, itemIndex) =>
-                      this.setState({ honapi: itemValue })
-                    }
-                  >
-                    <Picker.Item label="1 hónapos" value="1" />
-                    <Picker.Item label="2 hónapos" value="2" />
-                    <Picker.Item label="3 hónapos" value="3" />
-                    <Picker.Item label="4 hónapos" value="4" />
-                    <Picker.Item label="5 hónapos" value="5" />
-                    <Picker.Item label="6 hónapos" value="6" />
-                    <Picker.Item label="7 hónapos" value="7" />
-                    <Picker.Item label="8 hónapos" value="8" />
-                    <Picker.Item label="9 hónapos" value="9" />
-                    <Picker.Item label="10 hónapos" value="10" />
-                    <Picker.Item label="11 hónapos" value="11" />
-                    <Picker.Item label="12 hónapos" value="12" />
-                    <Picker.Item label="13 hónapos" value="13" />
-                    <Picker.Item label="14 hónapos" value="14" />
-                    <Picker.Item label="15 hónapos" value="15" />
-                    <Picker.Item label="16 hónapos" value="16" />
-                    <Picker.Item label="17 hónapos" value="17" />
-                    <Picker.Item label="18 hónapos" value="18" />
-                    <Picker.Item label="19 hónapos" value="19" />
-                    <Picker.Item label="20 hónapos" value="20" />
-                    <Picker.Item label="21 hónapos" value="21" />
-                    <Picker.Item label="22 hónapos" value="22" />
-                    <Picker.Item label="23 hónapos" value="23" />
-                    <Picker.Item label="24 hónapos" value="24" />
-                  </Picker>
+                  
                 </View>
                 <View
                   style={{
@@ -433,7 +457,7 @@ export default class Perc extends React.Component {
                       textAlign: "center"
                     }}
                     placeholder="pl: 6.54"
-                    onChangeText={sulyi => this.setState({ sulyi })}
+                    onChangeText={text => this.onChanged2(text)}
                     value={this.state.sulyi}
                     maxLength={10}
                   />
@@ -468,8 +492,8 @@ export default class Perc extends React.Component {
                       width: width - 100,
                       textAlign: "center"
                     }}
-                    placeholder="pl: 6.54"
-                    onChangeText={magassagi => this.setState({ magassagi })}
+                    placeholder="pl: 56.42"
+                    onChangeText={text => this.onChanged(text)}
                     value={this.state.magassagi}
                     maxLength={10}
                   />
@@ -481,7 +505,7 @@ export default class Perc extends React.Component {
               >
                 <TouchableOpacity
                   onPress={() => {
-                    this.modalVisible(false);
+                    this.modalVisible2(false);
                   }}
                 >
                   <View
@@ -508,7 +532,7 @@ export default class Perc extends React.Component {
       </View>
     );
   }
-  modal2() {
+  /*modal2() {
     index = 1;
     return (
       <View style={{ marginTop: 0 }}>
@@ -741,7 +765,7 @@ export default class Perc extends React.Component {
         </Modal>
       </View>
     );
-  }
+  }*/
 
   delete() {
     this.refs.swipeListView.safeCloseOpenRow();
@@ -798,7 +822,7 @@ export default class Perc extends React.Component {
     this.setState({
       modhonap: rowData.honap,
       moddate: rowData.date,
-      modSzam: rowID,
+      honapi: rowID,
       modsuly: rowData.suly,
       modmagassag: rowData.magassag,
       modalVisible2: true
@@ -918,7 +942,7 @@ export default class Perc extends React.Component {
     var pinterest = "http://pinterest.com";
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        {/*<TouchableOpacity
           onPress={() => this.modalVisible(true)}
           underlayColor="transparent"
           style={[styles.newFlight, { top: addFlightTop, left: addFlightLeft }]}
@@ -927,7 +951,7 @@ export default class Perc extends React.Component {
             style={styles.newFlightImage}
             source={require("../src/add-flight.png")}
           />
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
         <View
           style={{
             width: width,
@@ -981,7 +1005,6 @@ export default class Perc extends React.Component {
         <ScrollView>
           {this.mivan()}
           <View style={styles.container}>
-            {this.modal()}
             {this.modal2()}
 
             <View
@@ -1142,7 +1165,7 @@ export default class Perc extends React.Component {
                           ]}
                         >
                           {rowData.suly}
-                          {"kg"}
+                          {" kg"}
                         </Text>
                         <Text
                           numberOfLines={1}
@@ -1159,7 +1182,7 @@ export default class Perc extends React.Component {
                           ]}
                         >
                           {rowData.magassag}
-                          {"cm"}
+                          {" cm"}
                         </Text>
                       </View>
                       <View
@@ -1184,11 +1207,11 @@ export default class Perc extends React.Component {
                       this.deleteRow(rowData)
                     ]}
                   >
-                    <Text style={styles.backTextWhite}>Törlés</Text>
+                    <Text style={styles.backTextWhite}> </Text>
                   </TouchableOpacity>
                 </View>
               )}
-              rightOpenValue={this.state.swipe}
+              rightOpenValue={0}
             />
           </View>
           ); } }
@@ -1320,7 +1343,7 @@ const styles = StyleSheet.create({
   deleteBackground: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#ED5565",
+    backgroundColor: "white",
     width: "100%",
     height: 30,
     position: "absolute",

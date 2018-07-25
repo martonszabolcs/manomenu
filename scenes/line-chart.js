@@ -56,7 +56,7 @@ class LineChart extends React.Component {
     return [ {translateX: (-1 * x) - width / 2}, {translateY: (-1 * y) + width / 2}, { rotate: rad + 'rad' } ]
   }
 
-  drawCoordinate (index, start, end, backgroundColor, lineStyle, isBlank, lastCoordinate, seriesIndex, obj) {
+  drawCoordinate (index, start, end, backgroundColor, lineStyle, isBlank, lastCoordinate, seriesIndex) {
     let key = 'line' + index
     let dx = end.gap - start.gap
     let dy = end.ratioY - start.ratioY
@@ -73,7 +73,6 @@ class LineChart extends React.Component {
       height = end.ratioY
       top = -1 * (size - Math.abs(dy))
     }
-      if(end.y != 0 && start.y != 0) {
 
     return (
       <View key={key} style={{
@@ -109,11 +108,21 @@ class LineChart extends React.Component {
         {seriesIndex === this.state.sortedData.length - 1 && (
           <TouchableWithoutFeedback onPress={() => {
             let selectedIndex = lastCoordinate ? index - 1 : index
+
+            let emptyCount = 0
+            this.state.sortedData.map((series) => {
+              if (series.data[selectedIndex].isEmpty) emptyCount++
+            })
+            if (emptyCount === this.state.sortedData.length) {
+              return null
+            }
+            // console.log('point', selectedIndex, point)
+
             this.setState({
               selectedIndex: selectedIndex
             }, () => {
-              if (typeof this.props.onPointClick === 'function') {
-                this.props.onPointClick()
+              if (typeof this.props.onPress === 'function') {
+                this.props.onPress(selectedIndex)
               }
             })
           }}>
@@ -129,18 +138,17 @@ class LineChart extends React.Component {
 
       </View>
     )
-    }
-
   }
 
   drawPoint (index, point, seriesColor) {
     let key = 'point' + index
-    let size = 4
-
+    let size = 8
     let color = !seriesColor ? this.props.primaryColor : seriesColor
     if (this.state.selectedIndex === index) {
       color = this.props.selectedColor
     }
+
+    if (point.isEmpty) return null
 
     return (
       <TouchableWithoutFeedback key={key} onPress={() => {
@@ -148,9 +156,13 @@ class LineChart extends React.Component {
       }}>
 
         <View style={StyleSheet.flatten([styles.pointWrapper, {
-          width: 4,
-          height: 4,
+          width: size,
+          height: size,
 
+          left: point.gap - size / 2,
+          bottom: point.ratioY - size / 2,
+
+          borderColor: color,
           backgroundColor: color
 
         }])} />
@@ -160,7 +172,6 @@ class LineChart extends React.Component {
   drawValue (index, point) {
     let key = 'pointvalue' + index
     let size = 200
-    if (point.y != 0 || true){
     return (
 
       <View key={key} style={{
@@ -176,9 +187,6 @@ class LineChart extends React.Component {
       </View>
 
     )
-  } else {
-    return <View/>
-  }
   }
 
   drawCustomValue (index, point) {
@@ -197,14 +205,6 @@ class LineChart extends React.Component {
     let dataLength = data.length
 
     for (let i = 0; i < dataLength - 1; i++) {
-      /* if (data[i].y == 0){
-        var style={
-      borderColor: "transparent"
-
-        }
-      result.push(this.drawCoordinate(i, data[i], data[i + 1], '#FFFFFF00', style, false, false, seriesIndex))
-
-      } */
       result.push(this.drawCoordinate(i, data[i], data[i + 1], '#FFFFFF00', lineStyle, false, false, seriesIndex))
     }
 

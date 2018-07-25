@@ -64,7 +64,7 @@ export default class Profil extends Component<{}> {
   }
   goBack() {
     // a visszatero objektum:
-    if (this.state.date > 24) {
+    if (this.state.date > 2400) {
       Alert.alert(
         "Hiba!",
         "A percentilis görbén maximum 24 hónapig tudod vezetni a baba korát"
