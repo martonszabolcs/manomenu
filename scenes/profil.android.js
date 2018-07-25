@@ -57,8 +57,7 @@ export default class Profil extends Component<{}> {
     });
     setTimeout(() => {
       this.saveData();
-      this.lengthBaba();
-      this.heightBaba();
+     
     }, 100);
   }
 
@@ -72,8 +71,7 @@ export default class Profil extends Component<{}> {
       this.setState({
         addedData: list
       });
-      this.lengthBaba();
-      this.heightBaba();
+      
 
       // New list with no data
     } catch (error) {
