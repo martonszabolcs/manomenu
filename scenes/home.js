@@ -46,6 +46,7 @@ export default class Home extends Component<{}> {
       token: ""
     };
     this.onIds = this.onIds.bind(this);
+      OneSignal.init("8cb76a3c-7f85-40f1-adf2-1974edc46b0c");
 
     Actions.reset("home");
 
@@ -874,6 +875,7 @@ export default class Home extends Component<{}> {
 
   componentDidMount() {
     this.lekeres();
+
     OneSignal.configure({});
     Linking.getInitialURL()
       .then(url => {

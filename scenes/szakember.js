@@ -14,7 +14,8 @@ import {
 } from "react-native";
 
 import api from "../utilities/api";
-
+import { Marker } from "react-native-maps";
+import MapView from "react-native-maps";
 
 //import Noti from './noti';
 import markerImage from "../src/add-flight.png";
@@ -38,22 +39,72 @@ export default class Szakember extends Component<{}> {
           lat: 47.497913,
           lng: 19.040236,
           description:
-            "Stockholm is the capital and the largest city of Sweden and constitutes the most populated urban area in Scandinavia with a population of 2.1 million in the metropolitan area (2010)"
+            "Budapesti szakemberek"
         },
         {
-          title: "Oslo",
-          lat: 59.9,
-          lng: 10.8,
+          title: "Tatabánya",
+          lat: 47.569246,
+          lng: 18.404818,
           description:
-            "Oslo is a municipality, and the capital and most populous city of Norway with a metropolitan population of 1,442,318 (as of 2010)."
+          ""
         },
         {
-          title: "Copenhagen",
-          lat: 55.7,
-          lng: 12.6,
+          title: "Székesfehérvár",
+          lat: 47.186026,
+          lng: 18.422136,
           description:
-            "Copenhagen is the capital of Denmark and its most populous city, with a metropolitan population of 1,931,467 (as of 1 January 2012)."
-        }
+          ""
+        },
+        {
+          title: "Győr",
+          lat: 47.687457,
+          lng: 17.650397,
+          description:
+          ""
+        },
+
+        {
+          title: "Sopron",
+          lat: 47.681662,
+          lng: 16.584480,
+          description:
+          ""
+        },
+        {
+          title: "Veszprém",
+          lat: 47.102809,
+          lng: 17.909302,
+          description:
+          ""
+        },
+        {
+          title: "Szombathely",
+          lat: 47.230685,
+          lng: 16.621844,
+          description:
+          ""
+        },
+        {
+          title: "Zalaegerszeg",
+          lat: 46.841694,
+          lng: 16.841632,
+          description:
+          ""
+        },
+        {
+          title: "Kaposvár",
+          lat: 46.359361,
+          lng: 17.796764,
+          description:
+          ""
+        },
+        {
+          title: "Kaposvár",
+          lat: 46.359361,
+          lng: 17.796764,
+          description:
+          ""
+        },
       ]
     };
     this.dataSource = new ListView.DataSource({
@@ -122,7 +173,33 @@ export default class Szakember extends Component<{}> {
             style={{ width: 31 / 3, height: 58 / 3, zIndex: 100, left: 10 }}
           />
         </View>
-        
+        <MapView
+          region={this.state.region}
+          onRegionChange={this.onRegionChange}
+          style={styles.map}
+        >
+          {this.state.json.map((json, key) => {
+            console.log(json);
+            console.log(json.title)
+            console.log(key);
+            const metadata = `Status: ${json.statusValue}`;
+            return (
+              <Marker
+                onPress={e => Actions.szakember_varos({ varos: json.title })}
+                key={key}
+                coordinate={{ latitude: json.lat, longitude: json.lng }}
+                title={json.title}
+                description={json.description}
+              >
+                <MapView.Callout>
+                  <View>
+                    <Text>{json.description}</Text>
+                  </View>
+                </MapView.Callout>
+              </Marker>
+            );
+          })}
+        </MapView>
 
         <View style={[styles.menu, { width: width, height: height / 12 }]}>
           <TouchableOpacity onPress={() => Actions.home()}>
@@ -177,6 +254,8 @@ export default class Szakember extends Component<{}> {
 
 const styles = StyleSheet.create({
   container: {
+       ...StyleSheet.absoluteFillObject,
+
     flex: 1,
     backgroundColor: "white"
   },
@@ -231,8 +310,9 @@ const styles = StyleSheet.create({
     color: "white"
   },
   map: {
+    ...StyleSheet.absoluteFillObject,
     position: "absolute",
-    top: height / 15,
+    top: 0,
     left: 0,
     right: 0,
     bottom: 0

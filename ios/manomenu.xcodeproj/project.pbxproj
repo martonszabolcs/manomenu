@@ -39,6 +39,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		839571B1B54F4DAABB4BD9C8 /* libRNHTMLtoPDF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 498B6A4ED967470C851BA91D /* libRNHTMLtoPDF.a */; };
 		842F0E93FA964322BC725E2C /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E475CC8FC84067978A9BD5 /* libRCTSplashScreen.a */; };
+		90C5D9903C486494C1AC83F7 /* libPods-manomenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506E998DB46E24B4D02F72BD /* libPods-manomenu.a */; };
 		A90B7C200B40424FA9A8A5DC /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EC8695D6F4EF9B4CBD7AD /* libRCTOneSignal.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		EE95EA8121092B9E00632B68 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE95EA8021092B9E00632B68 /* Images-2.xcassets */; };
@@ -397,6 +398,7 @@
 		2D02E4901E0B4A5D006451C7 /* manomenu-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "manomenu-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30E475CC8FC84067978A9BD5 /* libRCTSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTSplashScreen.a; sourceTree = "<group>"; };
+		465312AE482D07E857A171F3 /* Pods-manomenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-manomenu.release.xcconfig"; path = "Pods/Target Support Files/Pods-manomenu/Pods-manomenu.release.xcconfig"; sourceTree = "<group>"; };
 		498B6A4ED967470C851BA91D /* libRNHTMLtoPDF.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNHTMLtoPDF.a; sourceTree = "<group>"; };
 		506E998DB46E24B4D02F72BD /* libPods-manomenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-manomenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		596CB4CB975549BD9F06287C /* RNHTMLtoPDF.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNHTMLtoPDF.xcodeproj; path = "../node_modules/react-native-html-to-pdf/ios/RNHTMLtoPDF.xcodeproj"; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8ED8862027FB4FA69E5BC582 /* RNHTMLtoPDFTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RNHTMLtoPDFTests.xctest; sourceTree = "<group>"; };
 		A3488CAF3FD84923A988A0C4 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/react-native-smart-splash-screen/ios/RCTSplashScreen/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
+		A8CB8F88ADEE8577FE38654F /* Pods-manomenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-manomenu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-manomenu/Pods-manomenu.debug.xcconfig"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C33EC8695D6F4EF9B4CBD7AD /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		D5F05EE9EF5D4CEC93776F93 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
@@ -457,6 +460,7 @@
 				839571B1B54F4DAABB4BD9C8 /* libRNHTMLtoPDF.a in Frameworks */,
 				23B295BD8AB04D878359D71E /* RNHTMLtoPDFTests.xctest in Frameworks */,
 				842F0E93FA964322BC725E2C /* libRCTSplashScreen.a in Frameworks */,
+				90C5D9903C486494C1AC83F7 /* libPods-manomenu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +632,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		541A0A00536EEC2B9E96250D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A8CB8F88ADEE8577FE38654F /* Pods-manomenu.debug.xcconfig */,
+				465312AE482D07E857A171F3 /* Pods-manomenu.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +700,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				EE7C5F412105202400D89C89 /* Recovered References */,
+				541A0A00536EEC2B9E96250D /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -783,10 +797,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "manomenu" */;
 			buildPhases = (
+				63B065536363DC9DC0AF0349 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				55005EA632822EA337C60494 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1324,6 +1340,42 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		55005EA632822EA337C60494 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-manomenu/Pods-manomenu-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-manomenu/Pods-manomenu-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		63B065536363DC9DC0AF0349 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-manomenu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1458,6 +1510,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8CB8F88ADEE8577FE38654F /* Pods-manomenu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
@@ -1492,6 +1545,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 465312AE482D07E857A171F3 /* Pods-manomenu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";

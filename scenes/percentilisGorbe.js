@@ -993,8 +993,7 @@ export default class Perc extends React.Component {
                   width: 31 / 2.6,
                   height: 58 / 2.6,
                   zIndex: 2312321312,
-                  left: 20,
-                  top:20
+                  marginLeft: 20,
                 }}
               />
             </View>
