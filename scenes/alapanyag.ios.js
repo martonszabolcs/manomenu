@@ -73,7 +73,6 @@ export default class Alapanyag extends Component<{}> {
       this.setState({
         zoldseg: zoldseg.list.reverse()
       });
-    });
 
     api.getGyumolcs().then(gyumolcs => {
       this.setState({
@@ -116,6 +115,8 @@ export default class Alapanyag extends Component<{}> {
         alacsonykaloria: alacsonykaloria.list.reverse()
       });
     });
+    });
+    
   }
 
   jumpToSlide(value) {

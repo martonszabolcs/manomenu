@@ -71,7 +71,6 @@ export default class Elkeszites extends Component<{}> {
       this.setState({
         sult: sult.list.reverse()
       });
-    });
 
     api.getParolt().then(parolt => {
       this.setState({
@@ -102,6 +101,8 @@ export default class Elkeszites extends Component<{}> {
         grillezett: grillezett.list.reverse()
       });
     });
+    });
+    
   }
 
   jumpToSlide(value) {

@@ -429,6 +429,7 @@
 		EE7C5FBF210524C600D89C89 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		EE7C5FC0210524C600D89C89 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		EE95EA8021092B9E00632B68 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "manomenu/Images-2.xcassets"; sourceTree = "<group>"; };
+		EEDBAD3B210A6F88003B1607 /* manomenu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = manomenu.entitlements; path = manomenu/manomenu.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,6 +573,7 @@
 		13B07FAE1A68108700A75B9A /* manomenu */ = {
 			isa = PBXGroup;
 			children = (
+				EEDBAD3B210A6F88003B1607 /* manomenu.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				EE7C5FBA210524C500D89C89 /* AmaticSC-Bold.ttf */,
@@ -864,6 +866,14 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6S6Y96U4LT;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1514,6 +1524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				CODE_SIGN_ENTITLEMENTS = manomenu/manomenu.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 6S6Y96U4LT;
@@ -1549,6 +1560,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				CODE_SIGN_ENTITLEMENTS = manomenu/manomenu.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S6Y96U4LT;
 				FRAMEWORK_SEARCH_PATHS = (

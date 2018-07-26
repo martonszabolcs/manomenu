@@ -69,17 +69,17 @@ export default class Etelfajtak extends Component<{}> {
   }
 
   componentWillMount() {
+    api.getTesztak().then(tesztak => {
+      this.setState({
+        tesztak: tesztak.list.reverse()
+      });
     api.getPurek().then(purek => {
       this.setState({
         purek: purek.list.reverse()
       });
     });
 
-    api.getTesztak().then(tesztak => {
-      this.setState({
-        tesztak: tesztak.list.reverse()
-      });
-    });
+    
 
     api.getFozelek().then(fozelek => {
       this.setState({
@@ -116,6 +116,8 @@ export default class Etelfajtak extends Component<{}> {
         szendvicsek: szendvicsek.list.reverse()
       });
     });
+    });
+
   }
 
   jumpToSlide(value) {

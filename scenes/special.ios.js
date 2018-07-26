@@ -67,6 +67,10 @@ export default class Special extends Component<{}> {
   }
 
   componentWillMount() {
+    api.getTojasmentes().then(tojasmentes => {
+      this.setState({
+        tojasmentes: tojasmentes.list.reverse()
+      });
     api.getGlutenmentes().then(glutenmentes => {
       this.setState({
         glutenmentes: glutenmentes.list.reverse()
@@ -79,11 +83,7 @@ export default class Special extends Component<{}> {
       });
     });
 
-    api.getTojasmentes().then(tojasmentes => {
-      this.setState({
-        tojasmentes: tojasmentes.list.reverse()
-      });
-    });
+    
 
     api.getCukormentes().then(cukormentes => {
       this.setState({
@@ -101,6 +101,8 @@ export default class Special extends Component<{}> {
       this.setState({
         alacsonykaloria: alacsonykaloria.list.reverse()
       });
+    });
+      
     });
   }
 
