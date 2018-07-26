@@ -94,10 +94,11 @@ export default class Szakember extends Component<{}> {
             </View>
           </TouchableOpacity>
           <View>
-            <Text style={styles.HOME}>{"SZAKEMBER KERESŐ"}</Text>
+            <Text style={styles.HOME}>{this.state.varos}</Text>
           </View>
           <View
-            style={{ width: 31 / 3, height: 58 / 3, zIndex: 100, left: 10 }}
+            style={{ width: height / 15,
+                height: height / 15, zIndex: 100}}
           />
         </View>
         <View

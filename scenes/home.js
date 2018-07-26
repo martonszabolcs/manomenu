@@ -812,7 +812,7 @@ export default class Home extends Component<{}> {
       ]};
 
       var percadatok = [
-        {date:"__", honap: 0, magassag:"55", suly: "6.54"},
+        {date:"Születés", honap: 0, magassag:"55", suly: "6.54"},
         {date:"__", honap: 1, magassag:"__", suly: "__"},
         {date:"__", honap: 2, magassag:"__", suly: "__"},
         {date:"__", honap: 3, magassag:"__", suly: "__"},

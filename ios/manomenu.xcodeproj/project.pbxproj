@@ -1537,7 +1537,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myitsolver.manomenu;
 				PRODUCT_NAME = manomenu;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1571,7 +1571,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu-com.myitsolver.manomenu";
+				PRODUCT_BUNDLE_IDENTIFIER = com.myitsolver.manomenu;
 				PRODUCT_NAME = manomenu;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

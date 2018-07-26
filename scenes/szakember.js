@@ -99,9 +99,79 @@ export default class Szakember extends Component<{}> {
           ""
         },
         {
-          title: "Kaposvár",
-          lat: 46.359361,
-          lng: 17.796764,
+          title: "Pécs",
+          lat: 46.072735,
+          lng: 18.232266,
+          description:
+          ""
+        },
+        {
+          title: "Szekszárd",
+          lat: 46.347433,
+          lng: 18.706229,
+          description:
+          ""
+        },
+        {
+          title: "Kecskemét",
+          lat: 46.896371,
+          lng: 19.689686,
+          description:
+          ""
+        },
+        {
+          title: "Eger",
+          lat: 47.902535,
+          lng: 20.377228,
+          description:
+          ""
+        },
+        {
+          title: "Miskolc",
+          lat: 48.103477,
+          lng: 20.778438,
+          description:
+          ""
+        },
+        {
+          title: "Nyíregyháza",
+          lat: 47.949532,
+          lng: 21.724405,
+          description:
+          ""
+        },
+        {
+          title: "Debrecen",
+          lat: 47.531605,
+          lng: 21.627312,
+          description:
+          ""
+        },
+        {
+          title: "Szolnok",
+          lat: 47.162136,
+          lng: 20.182471,
+          description:
+          ""
+        },
+        {
+          title: "Szeged",
+          lat: 46.253010,
+          lng: 20.141425,
+          description:
+          ""
+        },
+        {
+          title: "Békéscsaba",
+          lat: 46.673594,
+          lng: 21.087731,
+          description:
+          ""
+        }, 
+        {
+          title: "Salgótarján",
+          lat: 48.093524,
+          lng: 19.799981,
           description:
           ""
         },
@@ -170,7 +240,9 @@ export default class Szakember extends Component<{}> {
             <Text style={styles.HOME}>{"SZAKEMBER KERESŐ"}</Text>
           </View>
           <View
-            style={{ width: 31 / 3, height: 58 / 3, zIndex: 100, left: 10 }}
+            style={{ width: height / 15,
+                height: height / 15,
+                zIndex: 100}}
           />
         </View>
         <MapView
@@ -312,6 +384,7 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
     position: "absolute",
+    marginTop:height/15,
     top: 0,
     left: 0,
     right: 0,

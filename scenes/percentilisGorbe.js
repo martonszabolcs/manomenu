@@ -138,6 +138,15 @@ export default class Perc extends React.Component {
   };
 
   async saveNewItem() {
+    console.log(
+      this.state.magassagi
+    )
+    console.log(
+      this.state.honapi
+    )
+    console.log(
+      this.state.sulyi
+    )
 
     if (this.state.magassagi != "" && this.state.honapi && this.state.sulyi != ""){
 
@@ -505,6 +514,27 @@ export default class Perc extends React.Component {
                 </View>
                 <View style={{ height: 200 }} />
               </ScrollView>
+              <TouchableOpacity
+                  onPress={() => {
+                    this.setState({
+                      magassagi:"0",
+                      sulyi:"0",
+                      datei: "__",
+
+                    })
+                    console.log(this.state)
+                    setTimeout(() =>  {
+                    this.saveNewItem();
+
+                    },500)
+                  }}
+                >
+                  <View
+                    style={[styles.modalButton, { backgroundColor: "white" }]}
+                  >
+                    <Text style={{ color: "#00B8AC" }}>{"Adatok törlése!"}</Text>
+                  </View>
+                </TouchableOpacity>
               <View
                 style={{ flexDirection: "row", justifyContent: "space-around" }}
               >
