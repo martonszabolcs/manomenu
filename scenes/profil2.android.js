@@ -57,39 +57,52 @@ export default class Profil extends Component<{}> {
     });
     setTimeout(() => {
       this.saveData();
-      
+     
     }, 100);
   }
 
-  allas() {
-    console.log(this.state);
-    var nem = this.state.addedData.nem;
-    var honap = this.state.addedData.date;
-    var nev = this.state.addedData.nev;
-    var magassag = this.state.magassag;
-    setTimeout(function() {
-      if (nem == "lany") {
-        console.log("itt");
-        console.log(honap);
-        for (var i = 0; i < 27; i++) {
-          if (i == honap) {
-            console.log(i);
-            console.log(gLength);
-            gLength[5].data[i] = { x: nev, y: magassag };
-          }
-        }
-      }
-    }, 1000);
+  async _updateList() {
+    try {
+      var value = await AsyncStorage.getItem("@profil:baba");
+
+      var list = JSON.parse(value);
+
+      //this.updateStatistics(list);
+      this.setState({
+        addedData: list
+      });
+      
+
+      // New list with no data
+    } catch (error) {
+      // Can't access data
+    }
+
+    /*  const response = await AsyncStorage.getItem('@profil:adatok');
+  const listofData = await JSON.parse(response) || [];
+  this.setState({
+    addedData: listofData
+  });*/
+    console.log(this.state.addedData);
   }
+
+  async saveData(props) {
+    var lists = this.state.addedData;
+    //var avatar = this.state.avatarSource;
+    //avatar.push(list);
+    //var lists = avatar.concat(list);
+
+    await AsyncStorage.setItem("@profil:baba", JSON.stringify(lists));
+    console.log("saved");
+  }
+
   lengthBaba() {
-    console.log(this.state.addedData.gLength);
     if (this.state.addedData.nem == "lany") {
       var data = this.state.addedData;
       var honap = Number(this.state.addedData.date);
       var magassag = Number(this.state.addedData.magassag);
       if (honap < 24) {
         console.log(this.state.addedData.gLength[5].data[honap]);
-
         data.gLength[5].data[honap].y = magassag;
         data.gLength[5].data[honap].x = this.state.addedData.nev;
         this.setState({ addedData: data });
@@ -130,39 +143,6 @@ export default class Profil extends Component<{}> {
       }
     }
   }
-  async _updateList() {
-    try {
-      var value = await AsyncStorage.getItem("@profil:baba");
-
-      var list = JSON.parse(value);
-
-      //this.updateStatistics(list);
-      this.setState({
-        addedData: list
-      });
-      
-      // New list with no data
-    } catch (error) {
-      // Can't access data
-    }
-
-    /*  const response = await AsyncStorage.getItem('@profil:adatok');
-  const listofData = await JSON.parse(response) || [];
-  this.setState({
-    addedData: listofData
-  });*/
-    console.log(this.state.addedData);
-  }
-
-  async saveData(props) {
-    var lists = this.state.addedData;
-    //var avatar = this.state.avatarSource;
-    //avatar.push(list);
-    //var lists = avatar.concat(list);
-
-    await AsyncStorage.setItem("@profil:baba", JSON.stringify(lists));
-    console.log("saved");
-  }
 
   componentWillMount() {
     api.getMielott().then(mielott => {
@@ -173,9 +153,7 @@ export default class Profil extends Component<{}> {
       });
     });
   }
-  componentDidMount() {
-    //this.allas();
-  }
+  componentDidMount() {}
 
   nem() {
     if (this.state.addedData.nem == "fiu") {
@@ -258,7 +236,7 @@ export default class Profil extends Component<{}> {
             >
               <Image
                 source={require("../src/profil/ikon_szerk.png")}
-                style={{ width: 62 / 2, height: 62 / 2, zIndex: 100 }}
+                style={{ width: 62 / 2, height: 62 / 2, zIndex: 1021320 }}
               />
             </View>
           </TouchableOpacity>
@@ -278,6 +256,7 @@ export default class Profil extends Component<{}> {
               }}
             />
           </View>
+
           <View
             style={{
               width: width,
@@ -288,32 +267,33 @@ export default class Profil extends Component<{}> {
               alignItems: "center"
             }}
           >
-            <TouchableOpacity
-              onPress={() => {
-                Actions.valaszto();
-              }}
-            >
-              <Image
-                source={require("../src/nyil_feher.png")}
-               style={{
-                  width: 31 / 2.6,
-                  height: 58 / 2.6,
-                  zIndex: 2312321312,
-                  left: 20
+            <TouchableOpacity onPress={() => Actions.valaszto()}>
+              <View
+                style={{
+                  width: height / 15,
+                  height: height / 15,
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
-              />
+              >
+                <Image
+                  source={require("../src/nyil_feher.png")}
+                  style={{
+                    width: 31 / 3,
+                    height: 58 / 3,
+                    zIndex: 2312132321312,
+                    marginLeft: 10
+                  }}
+                />
+              </View>
             </TouchableOpacity>
             <View>
-              <Text
-                numberOfLines={2}
-                style={[styles.HOME, { color: "white", width: width - 100 }]}
-              >
-                {"Profil"}
-              </Text>
+              <Text style={styles.HOME}>{"Profil"}</Text>
             </View>
-            <View style={{ width: 31 / 3, height: 58 / 3 }} />
+            <View
+              style={{ width: 31 / 3, height: 58 / 3, zIndex: 100, left: 10 }}
+            />
           </View>
-
           <ScrollView>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
@@ -351,46 +331,39 @@ export default class Profil extends Component<{}> {
                 >
                   <Image
                     source={require("../src/profil/ikon_szerk.png")}
-                    style={{ width: 62 / 2, height: 62 / 2, zIndex: 100 }}
+                    style={{ width: 62 / 2, height: 62 / 2, zIndex: 1010 }}
                   />
                 </View>
               </TouchableOpacity>
             </View>
 
             <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.pick();
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: 10,
+                  backgroundColor: "white",
+                  borderWidth: 2,
+                  borderColor: "#00b8ac",
+                  borderRadius: 100,
+                  height: 150,
+                  width: 150
                 }}
-                style={{ zIndex: 321312312 }}
               >
-                <View
+                <Image
+                  source={require("../src/happy-baby.jpg")}
                   style={{
                     justifyContent: "center",
                     alignItems: "center",
-                    marginTop: 10,
-                    backgroundColor: "white",
                     borderWidth: 2,
                     borderColor: "#00b8ac",
-                    borderRadius: 100,
+                    borderRadius: 70,
                     height: 150,
                     width: 150
                   }}
-                >
-                  <Image
-                    source={require("../src/happy-baby.jpg")}
-                    style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderWidth: 2,
-                      borderColor: "#00b8ac",
-                      borderRadius: 70,
-                      height: 150,
-                      width: 150
-                    }}
-                  />
-                </View>
-              </TouchableOpacity>
+                />
+              </View>
             </View>
 
             <View style={{ backgroundColor: "white" }}>
@@ -462,7 +435,7 @@ export default class Profil extends Component<{}> {
                           {
                             backgroundColor: "transparent",
                             position: "absolute",
-                            top: 25,
+                            top: 18,
                             left: 13,
                             zIndex: 131231232
                           }
@@ -557,7 +530,7 @@ export default class Profil extends Component<{}> {
                           {
                             backgroundColor: "transparent",
                             position: "absolute",
-                            top: 7,
+                            top: 5,
                             zIndex: 131231232
                           }
                         ]}
@@ -569,10 +542,7 @@ export default class Profil extends Component<{}> {
                 </View>
               </View>
               <View
-                style={{
-                  flexDirection: "column",
-                  justifyContent: "center"
-                }}
+                style={{ flexDirection: "column", justifyContent: "center" }}
               >
                 <Text
                   style={{
@@ -589,7 +559,7 @@ export default class Profil extends Component<{}> {
 
                 <TouchableOpacity
                   onPress={() =>
-                    Actions.percentilisGorbe({ gyerek: this.state.addedData })
+                    Actions.percentilisGorbe2({ gyerek: this.state.addedData })
                   }
                 >
                   <View

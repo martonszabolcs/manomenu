@@ -180,7 +180,7 @@ export default class Receptek extends Component<{}> {
      </View>
      </View>
       <View style={{justifyContent:'center', alignItems:'center', backgroundColor:'transparent'}}>
-          <TouchableOpacity onPress={()=> Actions.profil()} style={{zIndex:2321121321}}>
+          <TouchableOpacity onPress={()=> Actions.valaszto()} style={{zIndex:2321121321}}>
           <View style={{justifyContent:'center', alignItems:'center', top:-20, marginRight:30, backgroundColor:'transparent'}}>
             <Image
               source={require('../src/egyebmenu/profil.png')}

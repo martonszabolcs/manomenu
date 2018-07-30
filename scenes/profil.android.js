@@ -267,7 +267,7 @@ export default class Profil extends Component<{}> {
               alignItems: "center"
             }}
           >
-            <TouchableOpacity onPress={() => Actions.egyeb()}>
+            <TouchableOpacity onPress={() => Actions.valaszto()}>
               <View
                 style={{
                   width: height / 15,

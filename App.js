@@ -68,6 +68,9 @@ import kereso from "./scenes/kereso";
 import keresoRecept from "./scenes/keresoRecept";
 import keresoReceptEnd from "./scenes/keresoReceptEnd";
 import szakember_varos from "./scenes/szakember_varos";
+import valaszto from "./scenes/valaszto";
+import profil2 from "./scenes/profil2";
+import percentilisGorbe2 from "./scenes/percentilisGorbe2";
 //import * as CacheManager from 'react-native-http-cache';
 
 export default class Flux extends Component {
@@ -204,6 +207,33 @@ export default class Flux extends Component {
               key="kedvencek"
               component={kedvencek}
               title="kedvencek"
+              onRight={() => {
+                Actions.pop();
+              }}
+              rightTitle="Back"
+            />
+            <Scene
+              key="valaszto"
+              component={valaszto}
+              title="valaszto"
+              onRight={() => {
+                Actions.pop();
+              }}
+              rightTitle="Back"
+            />
+            <Scene
+              key="percentilisGorbe2"
+              component={percentilisGorbe2}
+              title="percentilisGorbe2"
+              onRight={() => {
+                Actions.pop();
+              }}
+              rightTitle="Back"
+            />
+            <Scene
+              key="profil2"
+              component={profil2}
+              title="profil2"
               onRight={() => {
                 Actions.pop();
               }}

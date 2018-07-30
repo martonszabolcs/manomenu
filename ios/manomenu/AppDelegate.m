@@ -13,11 +13,14 @@
 
 
 @implementation AppDelegate
+@synthesize oneSignal = _oneSignal;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   NSURL *jsCodeLocation;
-  
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:@"8cb76a3c-7f85-40f1-adf2-1974edc46b0c"];
 
  
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

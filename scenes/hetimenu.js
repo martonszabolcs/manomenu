@@ -1983,13 +1983,13 @@ export default class Kedvencek extends Component<{}> {
               borderRadius: 100
             }}
           >
-            <TouchableOpacity onPress={() => this.saveList()}>
+           {/* <TouchableOpacity onPress={() => this.saveList()}>
               <View style={{ backgroundColor: "white", borderRadius: 10 }}>
                 <Text style={[styles.HOME, { color: "#00B8AC" }]}>
                   {"Hozzávalók a bevásárlólistára!"}
                 </Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
             <Text
               style={{ color: "#00b8ac", textAlign: "center", fontSize: 10 }}
             >

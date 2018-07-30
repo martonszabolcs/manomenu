@@ -1,4 +1,4 @@
-package com.manomenu;
+package com.myitsolver.manomenu;
 
 import android.app.Application;
 
