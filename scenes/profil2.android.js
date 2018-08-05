@@ -63,7 +63,7 @@ export default class Profil extends Component<{}> {
 
   async _updateList() {
     try {
-      var value = await AsyncStorage.getItem("@profil:baba");
+      var value = await AsyncStorage.getItem("@profil:baba2");
 
       var list = JSON.parse(value);
 
@@ -92,7 +92,7 @@ export default class Profil extends Component<{}> {
     //avatar.push(list);
     //var lists = avatar.concat(list);
 
-    await AsyncStorage.setItem("@profil:baba", JSON.stringify(lists));
+    await AsyncStorage.setItem("@profil:baba2", JSON.stringify(lists));
     console.log("saved");
   }
 

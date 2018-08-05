@@ -60,6 +60,7 @@ export default class ReceptekHTML extends Component<{}> {
     this.dataSource = new ListView.DataSource({rowHasChanged:(r1,r2) => r1.guid != r2.guid});
   }
   
+  
  
 onCancel() {
     console.log("CANCEL")

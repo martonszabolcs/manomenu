@@ -33,6 +33,12 @@ export default class Szakember extends Component<{}> {
       postCover: [],
       news: [],
       dataSource: [],
+      region: {
+        latitude: 47.0902,
+            longitude: 19.8777,
+            longitudeDelta:10.1,
+            latitudeDelta:10.1
+          },
       json: [
         {
           title: "Budapest",
@@ -165,6 +171,8 @@ export default class Szakember extends Component<{}> {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
+
+
 
   componentWillMount() {
     /*setTimeout(() => {

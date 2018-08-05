@@ -48,7 +48,124 @@ export default class Perc extends React.Component {
       rowHasChanged: (r1, r2) => r1.guid != r2.guid
     });
     this.loaddata();
+        this.profilAdat();
 
+
+  }
+
+  async profilAdat(){
+     var value = await AsyncStorage.getItem("@profil:baba2");
+
+      var list = JSON.parse(value);
+
+      //this.updateStatistics(list);
+      this.setState({
+        addedData: list
+      });
+      setTimeout(() => {
+      this.saveProfilItem();
+
+        },1000)
+  }
+   async saveProfilItem() {
+    console.log(
+      this.state.magassagi
+    )
+    console.log(
+      this.state.honapi
+    )
+    console.log(
+      this.state.sulyi
+    )
+
+    if (this.state.addedData.magassag != "" && this.state.addedData.date && this.state.addedData.suly != ""){
+
+    if (this.state.gender == "lany") {
+        console.log("gLength")
+      var data = this.state.gLength;
+      var honap = Number(this.state.addedData.date);
+      var magassag = Number(this.state.addedData.magassag);
+        console.log(this.state.gLength[5].data[honap]);
+
+        data[5].data[honap].y = magassag;
+        data[5].data[honap].x = this.state.nev;
+        this.setState({ gLength: data });
+    } else {
+        console.log("bLength")
+
+      var dataBoy = this.state.bLength;
+      var honap = Number(this.state.addedData.date);
+      var magassag = Number(this.state.addedData.magassag);
+        console.log(this.state.bLength[5].data[honap]);
+        dataBoy[5].data[honap].y = magassag;
+        dataBoy[5].data[honap].x = this.state.nev;
+        this.setState({ bLength: dataBoy });
+    }
+
+    if (this.state.gender == "lany") {
+        console.log("gHeight")
+
+      var data = this.state.gHeight;
+      var honap = Number(this.state.addedData.date);
+      var suly = Number(this.state.addedData.suly);
+        console.log(this.state.gHeight[5].data[honap]);
+        data[5].data[honap].y = suly;
+        data[5].data[honap].x = this.state.nev;
+        this.setState({ gHeight: data });
+      
+    } else {
+        console.log("bHeight")
+
+      var dataBoy = this.state.bHeight;
+      var honap = Number(this.state.addedData.date);
+      var suly = Number(this.state.addedData.suly);
+        console.log(this.state.bHeight[5].data[honap]);
+        dataBoy[5].data[honap].y = suly;
+        dataBoy[5].data[honap].x = this.state.nev;
+        this.setState({ bHeight: dataBoy });
+      
+    }
+
+    var lista = this.state.lista;
+
+    
+    lista[honap] = {magassag: this.state.addedData.magassag,
+      suly: this.state.addedData.suly,
+      honap: Number(this.state.addedData.date),
+      date: this.state.datei}
+
+    
+    setTimeout(() => {
+    var perc = {
+      bHeight: this.state.bHeight,
+      gHeight: this.state.gHeight,
+      bLength: this.state.bLength,
+      gLength: this.state.gLength
+    };
+
+
+    AsyncStorage.setItem('percentilismindenadat2', JSON.stringify(perc));
+    this.loaddata();
+
+    },1000)
+    
+
+    this.setState({ lista: lista });
+    console.log(this.state.lista);
+    setTimeout(() => {
+      this.saveList();
+    }, 200);
+
+    this.setState({
+      magassag: "",
+      suly: "",
+      honap: "",
+      date: ""
+    });
+
+  } else {
+    console.log('na')
+  }
   }
   async loaddata(){
         AsyncStorage.getItem('percentilismindenadat2', (err, result) => {
@@ -155,25 +272,21 @@ export default class Perc extends React.Component {
       var data = this.state.gLength;
       var honap = Number(this.state.honapi);
       var magassag = Number(this.state.magassagi);
-      if (honap < 24) {
         console.log(this.state.gLength[5].data[honap]);
 
         data[5].data[honap].y = magassag;
         data[5].data[honap].x = this.state.nev;
         this.setState({ gLength: data });
-      }
     } else {
         console.log("bLength")
 
       var dataBoy = this.state.bLength;
       var honap = Number(this.state.honapi);
       var magassag = Number(this.state.magassagi);
-      if (honap < 24) {
         console.log(this.state.bLength[5].data[honap]);
         dataBoy[5].data[honap].y = magassag;
         dataBoy[5].data[honap].x = this.state.nev;
         this.setState({ bLength: dataBoy });
-      }
     }
 
     if (this.state.gender == "lany") {
@@ -182,33 +295,29 @@ export default class Perc extends React.Component {
       var data = this.state.gHeight;
       var honap = Number(this.state.honapi);
       var suly = Number(this.state.sulyi);
-      if (honap < 24) {
         console.log(this.state.gHeight[5].data[honap]);
         data[5].data[honap].y = suly;
         data[5].data[honap].x = this.state.nev;
         this.setState({ gHeight: data });
-      }
     } else {
         console.log("bHeight")
 
       var dataBoy = this.state.bHeight;
       var honap = Number(this.state.honapi);
       var suly = Number(this.state.sulyi);
-      if (honap < 24) {
         console.log(this.state.bHeight[5].data[honap]);
         dataBoy[5].data[honap].y = suly;
         dataBoy[5].data[honap].x = this.state.nev;
         this.setState({ bHeight: dataBoy });
-      }
     }
 
     var lista = this.state.lista;
 
     
-    lista[honap] = {magassag: this.state.magassagi,
-      suly: this.state.sulyi,
-      honap: this.state.honapi,
-      date: this.state.datei}
+    lista[honap] = {magassag: Number(this.state.magassagi),
+      suly: Number(this.state.sulyi),
+      honap: Number(this.state.honapi),
+      date: Number(this.state.datei)}
 
     
     setTimeout(() => {
@@ -857,7 +966,7 @@ export default class Perc extends React.Component {
     this.setState({
       modhonap: rowData.honap,
       moddate: rowData.date,
-      honapi: rowID,
+      honapi: Number(rowID),
       modsuly: rowData.suly,
       modmagassag: rowData.magassag,
       modalVisible2: true
@@ -888,7 +997,7 @@ export default class Perc extends React.Component {
           <PureChart
             type={"line"}
             data={this.what()}
-            width={"100%"}
+            width={width}
             gap={12}
             height={height / 2}
             xAxisColor={"#f2f2f2"}
@@ -926,7 +1035,7 @@ export default class Perc extends React.Component {
           <PureChart
             type={"line"}
             data={this.what2()}
-            width={"90%"}
+            width={width}
             gap={12}
             height={height / 2}
             xAxisColor={"#f2f2f2"}

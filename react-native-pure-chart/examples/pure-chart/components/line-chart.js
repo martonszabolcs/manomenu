@@ -19,7 +19,6 @@ class LineChart extends React.Component {
       fadeAnim: new Animated.Value(0),
       guideArray: newState.guideArray
     }
-
     this.drawCoordinates = this.drawCoordinates.bind(this)
     this.drawCoordinate = this.drawCoordinate.bind(this)
     this.drawSelected = this.drawSelected.bind(this)
@@ -57,9 +56,6 @@ class LineChart extends React.Component {
   }
 
   flatten (index, start, end, backgroundColor, lineStyle, isBlank, lastCoordinate, seriesIndex, obj){
-console.log(start)
-    console.log(end)
-    console.log(lastCoordinate)
     let key = 'line' + index
     let dx = end.gap - start.gap
     let dy = end.ratioY - start.ratioY
@@ -76,7 +72,7 @@ console.log(start)
       height = end.ratioY
       top = -1 * (size - Math.abs(dy))
     }
-      if(end.y != 0 && start.y != 0) {
+      if(end.y != 0 && start.y != 0 && lineStyle.borderColor != "black" ) {
 
 
     return (
@@ -131,9 +127,7 @@ console.log(start)
   }
 
   drawCoordinate (index, start, end, backgroundColor, lineStyle, isBlank, lastCoordinate, seriesIndex, obj) {
-    console.log(start)
-    console.log(end)
-    console.log(lastCoordinate)
+ 
     let key = 'line' + index
     let dx = end.gap - start.gap
     let dy = end.ratioY - start.ratioY
@@ -167,15 +161,21 @@ console.log(start)
   }
 
  drawPoint (index, point, seriesColor) {
+  console.log(point)
     let key = 'point' + index
     let size = 0
     let color = !seriesColor ? this.props.primaryColor : seriesColor
+    
     if (this.state.selectedIndex === index) {
       color = this.props.selectedColor
+    }
+    if (seriesColor == "black"){
+      size = 6
     }
 
     if (point.isEmpty) return null
       if (point.y != 0){
+        console.log(point.y)
     return (
       <TouchableWithoutFeedback key={key} onPress={() => {
         this.setState({selectedIndex: index})
@@ -197,7 +197,6 @@ console.log(start)
   }
   }
   drawValue (index, point) {
-    console.log(point)
     let key = 'pointvalue' + index
     let size = 200
     if (point.y != 0 || true){

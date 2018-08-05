@@ -16,6 +16,7 @@ import {
   WebView,
   ListView,
   AsyncStorage,
+  TextInput,
   Button,
   ActivityIndicator
 } from "react-native";
@@ -29,8 +30,11 @@ import { Actions } from "react-native-router-flux";
 
 import Moment from "moment";
 const Unix = require("../utilities/unixHome");
-
+var { height, width } = Dimensions.get("window");
+  
 const instructions = Platform.select({});
+
+
 
 export default class Kedvencek extends Component<{}> {
   constructor(props) {
@@ -51,13 +55,24 @@ export default class Kedvencek extends Component<{}> {
       csutortokiBev: [],
       pentekiBev: [],
       szombatiBev: [],
+      torolte:0,
       vasarnapiBev: [],
       hetfo: 1,
-      filteredContent: []
+      filteredContent: [],
+      modalVisible: false,
+      modalVisible2: false,
+      szoveg: "Szerkesztés",
+      szin: "#FFFFFF"
     };
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.guid != r2.guid
     });
+  }
+  modalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+modalVisible2(visible) {
+    this.setState({ modalVisible2: visible });
   }
 
   async saveList() {
@@ -749,10 +764,11 @@ export default class Kedvencek extends Component<{}> {
       if (this.state.menus[i].nap == 0 && this.state.menus[i].etkezes == 4) {
         for (var z = 0; z < this.state.menus[i].tag.length; z++) {
           console.log(this.state.menus[i].tag[z].name);
-          newArray = {
-            title: [...newArray, this.state.menus[i].tag[z].name],
+          newArrayForm = {
+            title: this.state.menus[i].tag[z].name,
             value: ""
           };
+          newArray = newArray.concat(newArrayForm);
         }
       }
     }
@@ -1896,26 +1912,251 @@ export default class Kedvencek extends Component<{}> {
   async saveMenu(list) {
     await AsyncStorage.setItem("@menu:lista", JSON.stringify(list));
     console.log(list);
+    this._updateListMenu();
+    
   }
 
   deleteRow(etkezes) {
     console.log(etkezes);
+    this.setState({etkezesNap: etkezes[1], etkezesNapszak: etkezes[0]})
+    console.log(this.state.menus)
     var list = this.state.menus;
 
     for (var i = 0; i < list.length; i++) {
+      console.log(this.state)
       if (list[i].etkezes == etkezes[0] && list[i].nap == etkezes[1]) {
+          console.log('van egyezés a listával')
+          console.log(list[i])
+
+        if (list[i].tag.length > 0){
+          console.log('van a listának tagje')
+        this.setState({currentEtelID:list[i].id, szoveg:"Törlés", szin:"#EFD78B"})
+
+      } else {
+          console.log('nincs a listának tagje')
+
+        this.setState({szoveg:"Szerkesztés", szin:"#FFFFFF", currentEtelID:undefined,})
+         
+      }
+
+    } else {
+      console.log("nincs egyezés a listval")
+        //this.setState({szoveg:"Szerkesztés", szin:"#FFFFFF", currentEtelID:undefined,})
+
+    } 
+
+  }
+    this.setState({modalVisible2: true})
+
+  }
+
+  deletee(){
+    var list = this.state.menus;
+
+    if (list.length == 0){
+      console.log('itt ugrik fel hogy nincs semmi')
+        this.setState({modalVisible: true})
+      } else {
+
+
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].etkezes == this.state.etkezesNapszak && list[i].nap == this.state.etkezesNap) {
         // ha egyeznek az ID-k, akkor azt az elemet toroljuk
         list.splice(i, 1);
+        setTimeout(() => {
+        this.setState({modalVisible: true})
+
+        },200)
+      } else {
+        console.log('egyébként ugrik fel')
+        this.setState({modalVisible: true})
       }
     }
+    }
+
+
 
     this.saveMenu(list); // mentsuk el az uj listat
-
     this.setState({
       menus: list
     });
   }
 
+  saveNewItem() {
+    if (this.state.ujcim == ""){
+    this.modalVisible(false);
+
+    } else {
+    var newArrayForm = {
+      nev: this.state.ujcim,
+      etkezes: this.state.etkezesNapszak,
+      nap: this.state.etkezesNap,
+      tag:{
+      }
+    };
+    console.log(newArrayForm);
+    var lists = this.state.menus.concat(newArrayForm);
+
+    setTimeout(() => {
+      this.saveMenu(lists);
+    }, 200);
+
+    this.setState({ ujcim: ""});
+
+    this.modalVisible(false);
+  }
+  }
+modal() {
+    return (
+      <View style={{ marginTop: 0 }}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            console.log("Modal has been closed.");
+          }}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <View
+                style={{
+                  justifyContent: "center",
+                  flex: 1,
+                  alignItems: "center"
+                }}
+              >
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-around",
+                    alignItems: "center"
+                  }}
+                >
+                  <TextInput
+                    style={{ height: 40, width: width / 2 }}
+                    maxLength={10}
+                    placeholder="Új étel neve:"
+                    onChangeText={ujcim => this.setState({ ujcim })}
+                    value={this.state.ujcim}
+                  />
+                </View>
+              </View>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    this.modalVisible(false);
+                  }}
+                >
+                  <View
+                    style={[styles.modalButton, { backgroundColor: "white", height:height/10  }]}
+                  >
+                    <Text style={{ color: "red" }}>{"Mégse"}</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.saveNewItem();
+                  }}
+                >
+                  <View style={[styles.modalButton, {height:height/10}]}>
+                    <Text style={{ color: "white" }}>{"Kész!"}</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
+ 
+  modal2() {
+    return (
+      <View style={{ marginTop: 0 }}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible2}
+          onRequestClose={() => {
+            console.log("Modal has been closed.");
+          }}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+            <View style={{paddingTop: 0, flex:1, flexDirection:'row', justifyContent:'center'}}>
+              
+                  <TouchableOpacity
+                  onPress={() => {
+                    console.log(this.state)
+                    if (this.state.currentEtelID != undefined){
+                    this.modalVisible2(false);
+                    this.setState({
+                       szoveg: "Szerkesztés",
+                        szin: "#FFFFFF",
+                        currentEtelID: undefined
+                    })
+
+
+                    Actions.receptekHTML({tesztak: this.state.currentEtelID})
+                  }
+                  }}
+                >
+                  <View
+                    style={[styles.modalButton, { backgroundColor: this.state.szin }]}
+                  >
+                    <Text style={{ color: "white", textAlign:'center' }}>{"Megtekintés"}</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    //this.saveNewItem();
+                    this.modalVisible2(false);
+                    this.setState({
+                       szoveg: "Szerkesztés",
+                        szin: "#FFFFFF",
+                        currentEtelID: undefined
+                    })
+
+                    setTimeout(() => {
+                      this.deletee();
+                    },300)
+                  }}
+                >
+                  <View style={styles.modalButton}>
+                    <Text style={{ color: "white", textAlign:'center' }}>{this.state.szoveg}</Text>
+                  </View>
+                </TouchableOpacity>
+                  </View>
+
+                 <TouchableOpacity
+                  onPress={() => {
+                    this.modalVisible2(false);
+                    this.setState({
+                       szoveg: "Szerkesztés",
+                        szin: "#FFFFFF",
+                        currentEtelID: undefined
+                    })
+
+                  }}
+                >
+                  <View
+                    style={[styles.modalButton, { backgroundColor: "white",height:height/10 }]}
+                  >
+                    <Text style={{ color: "#1DB7AB", textAlign:'center' }}>{"Mégse"}</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </View>
+        </Modal>
+      </View>
+    );
+  }
   render() {
     var { height, width } = Dimensions.get("window");
     var facebook = "https://www.facebook.com/";
@@ -1935,6 +2176,8 @@ export default class Kedvencek extends Component<{}> {
 
     return (
       <View style={styles.container}>
+      {this.modal()}
+      {this.modal2()}
         <View
           style={{
             width: width,
@@ -4489,6 +4732,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     marginTop: 10
+  },
+  modalBackground: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.8)"
+  },
+
+  modalContainer: {
+    height: width / 2,
+    width: width / 1.5,
+    backgroundColor: "white",
+    alignItems: "center",
+  },
+
+  modalButton: {
+    height: height/6,
+    backgroundColor: "#00B8AC",
+    width: width / 3,
+    justifyContent: "center",
+    alignItems: "center"
   },
   list: {
     flexDirection: "row",

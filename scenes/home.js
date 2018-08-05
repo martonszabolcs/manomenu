@@ -217,7 +217,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 50 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -405,7 +405,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 3.3 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -593,7 +593,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 3.3 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -782,7 +782,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 50 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -813,7 +813,7 @@ export default class Home extends Component<{}> {
       ]};
 
       var percadatok = [
-        {date:"Születés", honap: 0, magassag:"55", suly: "6.54"},
+        {date:"Születés", honap: 0, magassag:"__", suly: "__"},
         {date:"__", honap: 1, magassag:"__", suly: "__"},
         {date:"__", honap: 2, magassag:"__", suly: "__"},
         {date:"__", honap: 3, magassag:"__", suly: "__"},
@@ -1012,7 +1012,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 50 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -1200,7 +1200,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 3.3 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -1388,7 +1388,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 3.3 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -1577,7 +1577,7 @@ export default class Home extends Component<{}> {
         {
           seriesName: "állás",
           data: [
-            { x: "_", y: 50 },
+            { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
             { x: "_", y: 0 },
@@ -1608,7 +1608,7 @@ export default class Home extends Component<{}> {
       ]};
 
       var percadatok = [
-        {date:"Születés", honap: 0, magassag:"55", suly: "6.54"},
+        {date:"Születés", honap: 0, magassag:"__", suly: "__"},
         {date:"__", honap: 1, magassag:"__", suly: "__"},
         {date:"__", honap: 2, magassag:"__", suly: "__"},
         {date:"__", honap: 3, magassag:"__", suly: "__"},
