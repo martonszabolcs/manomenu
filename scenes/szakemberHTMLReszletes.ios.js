@@ -48,13 +48,15 @@ export default class ReceptekHTML extends Component<{}> {
       dataSource: [],
       content:[],
       favourite: false,
-      tesztak: props.tesztak,
       favorites: '',
       isliked:'',
-      visible: false
+      visible: false,
+      varosId: this.props.varosId,
+      szakember: this.props.szakember
 
     }
-
+    console.log(this.state.szakember)
+    console.log(this.state.varosId)
     this.dataSource = new ListView.DataSource({rowHasChanged:(r1,r2) => r1.guid != r2.guid});
   }
   
@@ -147,18 +149,35 @@ onCancel() {
       console.log(this.props.tesztak);
 }, 100)
 
-    return fetch("http://46.101.62.53/Apps/rest/content/ARTICLE/"+this.state.tesztak, {
+    return fetch("http://46.101.62.53/Apps/rest/content/17/list?category="+this.state.varosId+"%2C"+this.state.szakember+"&andFilterBetweenCategories=true", {
         headers: {
           accept: "application/json",
+          AppId: "3"
         }
       }).then((res) => res.json())
     .then((res) => {
-      this.setState({
-        content: res,
-        HTML: '<style> img{width:50%;} </style> <div style="-webkit-user-select: none;">' + res.content + '</div>'
-      })
+      console.log(res)
+      return fetch(
+      "http://46.101.62.53/Apps/rest/content/ARTICLE/" + res.list[0].id,
+      {
+        headers: {
+          accept: "application/json"
+        }
+      }
+    )
+      .then(res2 => res2.json())
+      .then(res2 => {
+        this.setState({
+          content: res2,
+          HTML:
+            '<style> img{width:100%;} </style> <div style="-webkit-user-select: none;">' +
+            res2.content +
+            "</div>"
+        });
+      });
     })
   }
+ 
  
 
   async _addToFavorites() {
@@ -306,7 +325,7 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       <TouchableOpacity  onPress={() => { Actions.pop()}}>
         <Image
           source={require('../src/nyil_feher.png')}
-          style={{width:31/3, height:58/3, zIndex:100, marginLeft:20}}/>
+          style={{width:31/3, height:58/3, zIndex:100, marginLeft:10}}/>
       </TouchableOpacity>
             <View>
               <Text numberOfLines={2} style={[styles.HOME, {color:'white', width:width-100}]}>

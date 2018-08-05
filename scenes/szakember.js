@@ -36,144 +36,124 @@ export default class Szakember extends Component<{}> {
       json: [
         {
           title: "Budapest",
+          id: 67,
           lat: 47.497913,
-          lng: 19.040236,
-          description:
-            "Budapesti szakemberek"
+          lng: 19.040236
         },
         {
           title: "Tatabánya",
+          id: 68,
           lat: 47.569246,
-          lng: 18.404818,
-          description:
-          ""
+          lng: 18.404818
         },
         {
           title: "Székesfehérvár",
+          id: 70,
           lat: 47.186026,
-          lng: 18.422136,
-          description:
-          ""
+          lng: 18.422136
         },
         {
           title: "Győr",
+          id: 69,
           lat: 47.687457,
-          lng: 17.650397,
-          description:
-          ""
+          lng: 17.650397
         },
 
         {
           title: "Sopron",
+          id: 71,
           lat: 47.681662,
-          lng: 16.584480,
-          description:
-          ""
+          lng: 16.584480
         },
         {
           title: "Veszprém",
+          id: 72,
           lat: 47.102809,
-          lng: 17.909302,
-          description:
-          ""
+          lng: 17.909302
         },
         {
           title: "Szombathely",
+          id: 73,
           lat: 47.230685,
-          lng: 16.621844,
-          description:
-          ""
+          lng: 16.621844
         },
         {
           title: "Zalaegerszeg",
+          id: 74,
           lat: 46.841694,
-          lng: 16.841632,
-          description:
-          ""
+          lng: 16.841632
         },
         {
           title: "Kaposvár",
+          id: 75,
           lat: 46.359361,
-          lng: 17.796764,
-          description:
-          ""
+          lng: 17.796764
         },
         {
           title: "Pécs",
+          id: 76,
           lat: 46.072735,
-          lng: 18.232266,
-          description:
-          ""
+          lng: 18.232266
         },
         {
           title: "Szekszárd",
+          id: 77,
           lat: 46.347433,
-          lng: 18.706229,
-          description:
-          ""
+          lng: 18.706229
         },
         {
           title: "Kecskemét",
+          id: 78,
           lat: 46.896371,
-          lng: 19.689686,
-          description:
-          ""
+          lng: 19.689686
         },
         {
           title: "Eger",
+          id: 79,
           lat: 47.902535,
-          lng: 20.377228,
-          description:
-          ""
+          lng: 20.377228
         },
         {
           title: "Miskolc",
+          id: 80,
           lat: 48.103477,
-          lng: 20.778438,
-          description:
-          ""
+          lng: 20.778438
         },
         {
           title: "Nyíregyháza",
+          id: 81,
           lat: 47.949532,
-          lng: 21.724405,
-          description:
-          ""
+          lng: 21.724405
         },
         {
           title: "Debrecen",
+          id: 82,
           lat: 47.531605,
-          lng: 21.627312,
-          description:
-          ""
+          lng: 21.627312
         },
         {
           title: "Szolnok",
+          id: 83,
           lat: 47.162136,
-          lng: 20.182471,
-          description:
-          ""
+          lng: 20.182471
         },
         {
           title: "Szeged",
+          id: 84,
           lat: 46.253010,
-          lng: 20.141425,
-          description:
-          ""
+          lng: 20.141425
         },
         {
           title: "Békéscsaba",
+          id: 85,
           lat: 46.673594,
-          lng: 21.087731,
-          description:
-          ""
+          lng: 21.087731
         }, 
         {
           title: "Salgótarján",
+          id: 86,
           lat: 48.093524,
-          lng: 19.799981,
-          description:
-          ""
+          lng: 19.799981
         },
       ]
     };
@@ -257,9 +237,11 @@ export default class Szakember extends Component<{}> {
             const metadata = `Status: ${json.statusValue}`;
             return (
               <Marker
-                onPress={e => Actions.szakember_varos({ varos: json.title })}
+                onPress={e => Actions.szakember_varos({ varos: json.title, id:json.id })}
                 key={key}
-                coordinate={{ latitude: json.lat, longitude: json.lng }}
+                coordinate={{ latitude: json.lat, longitude: json.lng,
+                latitudeDelta: 0.0043,
+            longitudeDelta: 0.0034 }}
                 title={json.title}
                 description={json.description}
               >

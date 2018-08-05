@@ -13,7 +13,7 @@ import {
   ListView,
   Modal,
   WebView,
-  AsyncStorage,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -23,10 +23,6 @@ import {
 } from 'react-native-router-flux';
 
 
-
-
-const instructions = Platform.select({
-});
 function renderNode(node, index, siblings, parent, defaultRenderer) {
     var {height, width} = Dimensions.get('window');
 
@@ -35,6 +31,11 @@ function renderNode(node, index, siblings, parent, defaultRenderer) {
             return ( <Image key="key" style={{width: width-20, height: 300}} source={{uri: a.src}}/> );
         }
     }
+
+
+
+const instructions = Platform.select({
+});
 
 export default class ReceptekHTML extends Component<{}> {
 
@@ -48,16 +49,16 @@ export default class ReceptekHTML extends Component<{}> {
       dataSource: [],
       content:[],
       favourite: false,
-      tesztak: props.tesztak,
       favorites: '',
       isliked:'',
-      visible: false
+      visible: false,
+      varosId: this.props.varosId,
+      szakember: this.props.szakember
 
     }
 
     this.dataSource = new ListView.DataSource({rowHasChanged:(r1,r2) => r1.guid != r2.guid});
   }
-  
  
 onCancel() {
     console.log("CANCEL")
@@ -147,16 +148,30 @@ onCancel() {
       console.log(this.props.tesztak);
 }, 100)
 
-    return fetch("http://46.101.62.53/Apps/rest/content/ARTICLE/"+this.state.tesztak, {
+    return fetch("http://46.101.62.53/Apps/rest/content/17/list?category="+this.state.varosId+"%2C"+this.state.szakember+"&andFilterBetweenCategories=true", {
         headers: {
           accept: "application/json",
         }
       }).then((res) => res.json())
     .then((res) => {
-      this.setState({
-        content: res,
-        HTML: '<style> img{width:50%;} </style> <div style="-webkit-user-select: none;">' + res.content + '</div>'
-      })
+      return fetch(
+      "http://46.101.62.53/Apps/rest/content/ARTICLE/" + res.list[0].id,
+      {
+        headers: {
+          accept: "application/json"
+        }
+      }
+    )
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          content: res,
+          HTML:
+            '<style> img{width:100%;} </style> <div style="-webkit-user-select: none;">' +
+            res.content +
+            "</div>"
+        });
+      });
     })
   }
  
@@ -182,8 +197,7 @@ onCancel() {
     console.log(listofFav);
   }
 
-
-
+  
 
   componentDidMount(){
     this._updateList();
@@ -209,7 +223,6 @@ onCancel() {
     console.log(this.state.favourite + 'favourite');
   });
 }
-
 pictureHide(){
       var {height, width} = Dimensions.get('window');
 
@@ -223,24 +236,13 @@ pictureHide(){
     return ( <View/>)
   }
 }
-onNavigationChange(event) {
-        if (event.title) {
-            const htmlHeight = Number(event.title) //convert to number
-            this.setState({Height:htmlHeight});
-        }
-
-     }
-
 
 
 
   render() {
-
-
-
-const HTML2 = `
-  <div style="-webkit-user-select: none;">
-
+    var HTML = this.state.content.content;
+    const HTML2 = `
+  <div class="comment">
     <span class="c00">
       <b><i>&gt; Dwayne’s only companion at night was a Labrador retriever named Sparky.</i></b>
     <p>
@@ -297,23 +299,26 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       subject: "Share Link" //  for email
     };
 
-    console.log(this.state.content);
+    console.log(this.state.favorites);
+    console.log(this.state.HTML)
+
 
     return (
       <View style={styles.container}>
-     
-      <View style={{width:width, height:height/15, backgroundColor:'#00b8ac', flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
-      <TouchableOpacity  onPress={() => { Actions.pop()}}>
+      <View style={{width:width, height:height/15, backgroundColor:'#00b8ac', flexDirection:'row', justifyContent:'flex-start', alignItems:'center'}}>
+      <TouchableOpacity onPress={() => { Actions.pop()}}>
+      <View style={{width:height/15, height:height/15, justifyContent:'center', alignItems:'center'}}>
         <Image
           source={require('../src/nyil_feher.png')}
-          style={{width:31/3, height:58/3, zIndex:100, marginLeft:20}}/>
+          style={{width:31/3, height:58/3,  zIndex:2312132321312, marginLeft:10}}/>
+            </View>
+
       </TouchableOpacity>
-            <View>
+            <View style={{marginLeft:10}}>
               <Text numberOfLines={2} style={[styles.HOME, {color:'white', width:width-100}]}>
                 {this.state.content.title}
               </Text>
             </View>
-            <View style={{width:31/3, height:58/3}}/>
 
         </View>
 
@@ -341,15 +346,17 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
 
 
         <View style={{flex:1}}>
-        <WebView ref={'webview'}
-        automaticallyAdjustContentInsets={false} source={{html: this.state.HTML}} scalesPageToFit={false}
- style={{width:width, height:height, backgroundColor:'transparent'}} scrollEnabled={true} />
-       
+         <WebView 
          
 
-      </View>
+  decelerationRate="normal"
+
+  javaScriptEnabledAndroid={true}
+  ref={'webview'} source={{ html: this.state.HTML, baseUrl:''}} scalesPageToFit={true} style={{width:width, height:height}} />
+         
+        </View>
         <View style={{height:height/12}}/>
-    
+
         {/*<View style={{width:width, height:width/7, marginBottom:height/12, alignItems:'center', justifyContent:'center', backgroundColor: '#f6eec2', flexDirection:'row'}}>
       <View style={{flexDirection:'row', justifyContent:'space-around'}}>
           

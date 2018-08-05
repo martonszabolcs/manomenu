@@ -31,9 +31,11 @@ export default class Szakember extends Component<{}> {
       postCover: [],
       news: [],
       dataSource: [],
-      varos: this.props.varos
+      varos: this.props.varos,
+      varosId: this.props.id
     };
     console.log(this.state.varos)
+    console.log(this.state.varosId)
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.guid != r2.guid
     });
@@ -110,7 +112,8 @@ export default class Szakember extends Component<{}> {
         >
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 167 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:87, szakemberNev: "Dietetikus"+" - "+this.state.varos  });
+              
             }}
           >
             <View
@@ -136,7 +139,8 @@ export default class Szakember extends Component<{}> {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 169 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:88, szakemberNev: "Gasztroenterológus"+" - "+this.state.varos  });
+              
             }}
           >
             <View
@@ -171,7 +175,8 @@ export default class Szakember extends Component<{}> {
         >
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 170 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:89, szakemberNev: "Allergológus"+" - "+this.state.varos  });
+              
             }}
           >
             <View
@@ -197,7 +202,7 @@ export default class Szakember extends Component<{}> {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 168 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:90, szakemberNev: "Pszichológus"+" - "+this.state.varos  });
             }}
           >
             <View
@@ -232,7 +237,8 @@ export default class Szakember extends Component<{}> {
         >
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 171 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:91, szakemberNev: "Fogorvos"+" - "+this.state.varos  });
+             
             }}
           >
             <View
@@ -258,7 +264,8 @@ export default class Szakember extends Component<{}> {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              Actions.hetrolHTML({ tesztak: 172 });
+              Actions.szakemberHTML({ varosId: this.state.varosId, szakember:92, szakemberNev: "Egyéb"+" - "+this.state.varos  });
+              
             }}
           >
             <View
@@ -415,7 +422,7 @@ const styles = StyleSheet.create({
     />
   ))}
  <View style={{justifyContent:'space-around', flexDirection:'row', marginTop:0}}>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 167})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 167})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#00b8ac', justifyContent:'center',alignItems:'center', borderRadius:10}}>
             
               <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
@@ -424,7 +431,7 @@ const styles = StyleSheet.create({
 
           </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 169})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 169})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#f0d886', justifyContent:'center',alignItems:'center', borderRadius:10}}>
             <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
                   {'Gasztro-\nenterológus'}
@@ -434,7 +441,7 @@ const styles = StyleSheet.create({
         </View>
 
         <View style={{justifyContent:'space-around', flexDirection:'row', marginTop:0}}>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 170})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 170})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#8fba55', justifyContent:'center',alignItems:'center', borderRadius:10}}>
             <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
                   {'Allergológus'}
@@ -442,7 +449,7 @@ const styles = StyleSheet.create({
 
           </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 168})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 168})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#ff5358', justifyContent:'center',alignItems:'center', borderRadius:10}}>
             <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
                   {'Pszichológus'}
@@ -452,7 +459,7 @@ const styles = StyleSheet.create({
         </View> 
 
        <View style={{justifyContent:'space-around', flexDirection:'row', marginTop:0}}>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 171})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 171})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#00b8ac', justifyContent:'center',alignItems:'center', borderRadius:10}}>
               <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
                   {'Fogorvos (gyermek)'}
@@ -460,7 +467,7 @@ const styles = StyleSheet.create({
 
           </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=> {Actions.hetrolHTML({ tesztak: 172})}}>
+          <TouchableOpacity onPress={()=> {Actions.szakemberHTML({ tesztak: 172})}}>
           <View style={{width:height/4, height:height/4, margin:5, backgroundColor:'#f0d886', justifyContent:'center',alignItems:'center', borderRadius:10}}>
             <Text style={[styles.cim, {position:'absolute', backgroundColor:'transparent'}]}>
                   {'Egyéb'}

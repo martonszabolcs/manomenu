@@ -71,6 +71,7 @@ import szakember_varos from "./scenes/szakember_varos";
 import valaszto from "./scenes/valaszto";
 import profil2 from "./scenes/profil2";
 import percentilisGorbe2 from "./scenes/percentilisGorbe2";
+import szakemberHTML from "./scenes/szakemberHTML";
 //import * as CacheManager from 'react-native-http-cache';
 
 export default class Flux extends Component {
@@ -184,6 +185,13 @@ export default class Flux extends Component {
                 Actions.hozzataplalas();
               }}
               rightTitle="hozzataplalas"
+            />
+            <Scene
+              key="szakemberHTML"
+              component={szakemberHTML}
+              title="szakemberHTML"
+              onRight={() => {
+              }}
             />
             <Scene
               key="hozzataplalas"

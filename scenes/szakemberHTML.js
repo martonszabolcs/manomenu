@@ -48,13 +48,17 @@ export default class ReceptekHTML extends Component<{}> {
       dataSource: [],
       content:[],
       favourite: false,
-      tesztak: props.tesztak,
+      lista:[],
       favorites: '',
       isliked:'',
-      visible: false
+      visible: false,
+      varosId: this.props.varosId,
+      szakember: this.props.szakember,
+      szakemberNev: this.props.szakemberNev
 
     }
-
+    console.log(this.state.szakember)
+    console.log(this.state.varosId)
     this.dataSource = new ListView.DataSource({rowHasChanged:(r1,r2) => r1.guid != r2.guid});
   }
   
@@ -147,18 +151,17 @@ onCancel() {
       console.log(this.props.tesztak);
 }, 100)
 
-    return fetch("http://46.101.62.53/Apps/rest/content/ARTICLE/"+this.state.tesztak, {
+    return fetch("http://46.101.62.53/Apps/rest/content/17/list?category="+this.state.varosId+"%2C"+this.state.szakember+"&andFilterBetweenCategories=true", {
         headers: {
           accept: "application/json",
+          AppId: "3"
         }
       }).then((res) => res.json())
-    .then((res) => {
-      this.setState({
-        content: res,
-        HTML: '<style> img{width:50%;} </style> <div style="-webkit-user-select: none;">' + res.content + '</div>'
-      })
+    .then((resed) => {
+     this.setState({lista: resed.list})
     })
   }
+ 
  
 
   async _addToFavorites() {
@@ -297,7 +300,6 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       subject: "Share Link" //  for email
     };
 
-    console.log(this.state.content);
 
     return (
       <View style={styles.container}>
@@ -310,79 +312,45 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       </TouchableOpacity>
             <View>
               <Text numberOfLines={2} style={[styles.HOME, {color:'white', width:width-100}]}>
-                {this.state.content.title}
+              {this.state.szakemberNev}
               </Text>
             </View>
             <View style={{width:31/3, height:58/3}}/>
 
         </View>
 
-        <View>
-         {this.pictureHide()}
-        </View>
-          <View style={{width:width, height:width/7, alignItems:'center', justifyContent:'center', backgroundColor: '#f0d886', flexDirection:'row'}}>
-          <View style={{width:width*4/6, height:width/7, justifyContent:'center'}}>
-          <Text numberOfLines={2} style={{textAlign:'left', marginLeft:10}}>
-          {this.state.content.title}
-          </Text>
-          </View>
+        <ScrollView style={{backgroundColor:'white'}}>
+                <ListView
+            dataSource={this.dataSource.cloneWithRows(this.state.lista)}
+            enableEmptySections={true}
+            initialListSize={10}
+            contentContainerStyle={styles.list}
+            scrollEnabled={true}
+            removeClippedSubviews={true}
+            pageSize={10}
+            //column={2}
+            renderRow={ (rowData, sectionID, rowID, highlightRow)=> (
+            <View numberOfLines={1} style={{backgroundColor:'white'}}>
+              <View style={{marginTop:10}}>
+              <TouchableOpacity onPress={() => {Actions.hetrolHTML({ tesztak: rowData.id})}}>
+              <View style={{backgroundColor:"#dff7f5", width:width/2-10, height:height/4, borderRadius:10}}>
+                <Image
+                resizeMethod="resize"
+                  source={{uri:rowData.imageUrl}}
+                  style={{width:width/2-10, height:height/6, zIndex:100, borderRadius:10}}/>
+                <Text numberOfLines={2} style={[styles.cim, {color:'#17776f', marginLeft:5, paddingTop:2, paddingBottom:2, textAlign:'center', fontSize:16}]}>
+                  {rowData.title}
+                </Text>
+              </View>
+              </TouchableOpacity>
 
-          <TouchableOpacity onPress={(event) => {
-                  [this.setFavourite(!this.state.favourite), this.favourites()]
-                }}>
-          <View style={{width:width/6, height:width/6, alignItems:'center', justifyContent:'center'}}>
-          <Image
-          source={this.favPics()}
-          style={{width:width/6/1.8, height:width/6/2,zIndex:21312,}}/>
-          </View>
-          </TouchableOpacity>
+              </View>
+              </View>
+              )}>
+          </ListView>
+              <View style={{height:100}}/>
 
-        </View>
-
-
-        <View style={{flex:1}}>
-        <WebView ref={'webview'}
-        automaticallyAdjustContentInsets={false} source={{html: this.state.HTML}} scalesPageToFit={false}
- style={{width:width, height:height, backgroundColor:'transparent'}} scrollEnabled={true} />
-       
-         
-
-      </View>
-        <View style={{height:height/12}}/>
-    
-        {/*<View style={{width:width, height:width/7, marginBottom:height/12, alignItems:'center', justifyContent:'center', backgroundColor: '#f6eec2', flexDirection:'row'}}>
-      <View style={{flexDirection:'row', justifyContent:'space-around'}}>
-          
-<TouchableOpacity onPress={()=>{
-          Share.open(shareOptions)}}>
-                    <View style={{marginLeft:10, marginRight:10}}>
-           <Image
-                  source={require('../src/menu/cikk_megosztas.png')}
-                style={{width:61/2, height:66/2, zIndex:100}}/>
-          </View>
-          </TouchableOpacity>
-           
-       <View style={{marginLeft:10, marginRight:10}}>
-           <Image
-                  source={require('../src/menu/cikk_fb.png')}
-                style={{width:30, height:30, zIndex:100}}/>
-          </View>
-          
-         <View style={{marginLeft:10, marginRight:10}}>
-           <Image
-                source={require('../src/menu/cikk_google.png')}
-                style={{width:30, height:30, zIndex:100}}/>
-          </View>
-                    
-        <View style={{marginLeft:10, marginRight:10}}>
-           <Image
-                source={require('../src/menu/cikk_pinterest.png')}
-                style={{width:30, height:30, zIndex:100}}/>
-          </View>
-          
-          </View>
-
-        </View>*/}
+        </ScrollView> 
 
                <View style={[styles.menu, {width:width, height:height/12}]}>
         <TouchableOpacity  onPress={()=> Actions.home()}>
@@ -470,6 +438,11 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontFamily: 'futura-bold',
     textAlign:'center'
+  },
+  list: {
+   flexDirection: 'row',
+        flexWrap: 'wrap',
+    justifyContent:'space-around'
   },
   menu: {
     position:'absolute',

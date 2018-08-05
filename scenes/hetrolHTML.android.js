@@ -296,7 +296,7 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       <View style={{width:height/15, height:height/15, justifyContent:'center', alignItems:'center'}}>
         <Image
           source={require('../src/nyil_feher.png')}
-          style={{width:31/3, height:58/3,  zIndex:2312132321312, marginLeft:10}}/>
+          style={{width:31/3, height:58/3,  zIndex:2312132321312, marginLeft:20}}/>
             </View>
 
       </TouchableOpacity>
