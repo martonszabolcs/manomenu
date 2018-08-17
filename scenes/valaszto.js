@@ -50,12 +50,49 @@ export default class ReceptekHTML extends Component<{}> {
       favourite: false,
       tesztak: props.tesztak,
       favorites: "",
-      isliked: ""
+      isliked: "",
+      nev1:"",
+      nev2:""
     };
 
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.guid != r2.guid
     });
+    this._updateList1();
+    this._updateList2();
+  }
+   async _updateList1() {
+    try {
+      var value = await AsyncStorage.getItem("@profil:baba");
+
+      var list = JSON.parse(value);
+      console.log(list)
+
+      //this.updateStatistics(list);
+      this.setState({
+        nev1: list.nev
+      });
+      
+      // New list with no data
+    } catch (error) {
+      // Can't access data
+    }
+  }
+  async _updateList2() {
+    try {
+      var value = await AsyncStorage.getItem("@profil:baba2");
+
+      var list = JSON.parse(value);
+      console.log(list)
+      //this.updateStatistics(list);
+      this.setState({
+        nev2: list.nev
+      });
+      
+      // New list with no data
+    } catch (error) {
+      // Can't access data
+    }
   }
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
@@ -227,6 +264,17 @@ export default class ReceptekHTML extends Component<{}> {
   }
 
   render() {
+    if(this.state.nev1 == ""){
+      var nev1 = "1. Baba"
+    } else {
+      var nev1 = this.state.nev1
+    }
+    if(this.state.nev2 == ""){
+      var nev2 = "2. Baba"
+    } else {
+      var nev2 = this.state.nev2
+    }
+
     var { height, width } = Dimensions.get("window");
     this.favGombInitial();
     const HTML2 = `
@@ -322,7 +370,7 @@ export default class ReceptekHTML extends Component<{}> {
             <TouchableOpacity onPress={() => Actions.profil()}>
               <View style={styles.menu1}>
                 <Image
-                  source={require("../src/baba.png")}
+                  source={require("../src/baba.jpg")}
                   style={{ width: height / 5, height: height / 5 }}
                 />
               </View>
@@ -338,7 +386,7 @@ export default class ReceptekHTML extends Component<{}> {
                 }
               ]}
             >
-              {"Első Baba"}
+              {nev1}
             </Text>
           </View>
           <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -361,7 +409,7 @@ export default class ReceptekHTML extends Component<{}> {
                 }
               ]}
             >
-              {"Második Baba"}
+              {nev2}
             </Text>
           </View>
         </View>

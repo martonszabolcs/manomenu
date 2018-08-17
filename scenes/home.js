@@ -813,7 +813,7 @@ export default class Home extends Component<{}> {
       ]};
 
       var percadatok = [
-        {date:"Születés", honap: 0, magassag:"__", suly: "__"},
+        {date:"__", honap: 0, magassag:"__", suly: "__"},
         {date:"__", honap: 1, magassag:"__", suly: "__"},
         {date:"__", honap: 2, magassag:"__", suly: "__"},
         {date:"__", honap: 3, magassag:"__", suly: "__"},
@@ -1608,7 +1608,7 @@ export default class Home extends Component<{}> {
       ]};
 
       var percadatok = [
-        {date:"Születés", honap: 0, magassag:"__", suly: "__"},
+        {date:"__", honap: 0, magassag:"__", suly: "__"},
         {date:"__", honap: 1, magassag:"__", suly: "__"},
         {date:"__", honap: 2, magassag:"__", suly: "__"},
         {date:"__", honap: 3, magassag:"__", suly: "__"},
@@ -1794,6 +1794,7 @@ export default class Home extends Component<{}> {
     var facebookGroup = "https://www.facebook.com/groups/752237094919260/";
     var youtube = "https://www.youtube.com/channel/UC8EkPnfTiH8HNzEUaiUjNqw";
     var insta = "https://www.instagram.com/manomenu_/";
+    var url= "https://shop.manomenu.hu/hu/"
 
     const switchTwoValue = this.state.switchTwoValue;
     return (
@@ -2162,14 +2163,16 @@ export default class Home extends Component<{}> {
               marginBottom: 30
             }}
           >
-            <Text style={styles.nameText}>{"TERMÉKAJÁNLÓ"}</Text>
+            <Text style={styles.nameText}>{"Webshop"}</Text>
             <TouchableOpacity
-              onPress={() => Actions.termek({ id: this.state.eventid1 })}
+              onPress={() =>  Linking.openURL(url).catch(err =>
+                    console.error("An error occurred", err)
+                  )}
             >
-              <View style={{ justifyContent: "center", alignItems: "center" }}>
-                <View style={{ width: width - 20, height: height / 4 }}>
+              <View style={{ justifyContent: "center", alignItems: "center", width:width-20, borderTopWidth:1,borderBottomWidth:1, borderRadius:10, borderColor:"gray"  }}>
+                <View style={{ width: width - 20, height: height / 4, }}>
                   <Image
-                    source={{ uri: this.state.eventPic1 }}
+                    source={require ('../src/webshop.png')}
                     style={{
                       width: width - 20,
                       height: height / 4,
@@ -2179,38 +2182,6 @@ export default class Home extends Component<{}> {
                 </View>
               </View>
             </TouchableOpacity>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                width: width - 40
-              }}
-            >
-              <View style={{ justifyContent: "flex-start", marginLeft: 10 }}>
-                <View>
-                  <Text
-                    numberOfLines={2}
-                    style={[
-                      styles.event,
-                      { fontSize: 20, marginRight: width / 4 }
-                    ]}
-                  >
-                    {this.state.eventTitle1}
-                  </Text>
-                </View>
-              </View>
-            </View>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <View
-                style={{
-                  margin: 10,
-                  width: width - 50,
-                  height: 0.3,
-                  backgroundColor: "gray",
-                  borderRadius: 20
-                }}
-              />
-            </View>
           </View>
 
           <View>

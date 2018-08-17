@@ -330,10 +330,10 @@ export const drawXAxisLabels = (sortedData, gap, color = '#000000') => {
               width: gap,
               alignItems: 'center'
             }}>
-              <Text style={{fontSize: 9, color: color}}>
+              <Text style={{fontSize: 7, color: color}}>
                 {
                   // data[3]
-                  i+'.Hónap'
+                  i+'. H'
                 }
               </Text>
             </View>

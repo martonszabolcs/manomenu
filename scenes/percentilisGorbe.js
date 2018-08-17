@@ -1093,6 +1093,14 @@ export default class Perc extends React.Component {
     }
   }
 
+  honapadat(rowData){
+    if (rowData.honap == 0) {
+      return "Születés"
+    } else {
+      return rowData.honap
+    }
+  }
+
   render() {
     var addFlightLeft = (width - 60) / 2;
     var addFlightTop = height - 70;
@@ -1131,7 +1139,7 @@ export default class Perc extends React.Component {
                   width: 31 / 2.6,
                   height: 58 / 2.6,
                   zIndex: 2312321312,
-                  marginLeft: 20,
+                  marginLeft: 30,
                 }}
               />
             </View>
@@ -1290,8 +1298,7 @@ export default class Perc extends React.Component {
                             }
                           ]}
                         >
-                          {rowData.honap}
-                          {"."}
+                          {this.honapadat(rowData)}
                         </Text>
                         <Text
                           numberOfLines={1}

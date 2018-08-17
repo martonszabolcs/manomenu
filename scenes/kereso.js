@@ -82,7 +82,12 @@ export default class Bevasarlas extends Component<{}> {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
+        if (text == ""){
+      this.setState({data:[]})
+    } else {
         this.setState({ data: responseJson.list });
+
+    }
       })
       .catch(error => {
         console.log(error);
@@ -519,6 +524,7 @@ export default class Bevasarlas extends Component<{}> {
                   width: 31 / 3,
                   height: 58 / 3,
                   zIndex: 100,
+                  marginLeft:20,
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10
                 }}
@@ -540,6 +546,9 @@ export default class Bevasarlas extends Component<{}> {
               this.search(text);
             }}
             onCancel={text => {
+              this.setState({ data: [] });
+            }} 
+            onDelete={text => {
               this.setState({ data: [] });
             }}
             backgroundColor="#1DB7AB"

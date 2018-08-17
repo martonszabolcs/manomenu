@@ -308,7 +308,7 @@ const REACT_ICON = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
       <TouchableOpacity  onPress={() => { Actions.pop()}}>
         <Image
           source={require('../src/nyil_feher.png')}
-          style={{width:31/3, height:58/3, zIndex:100, marginLeft:20}}/>
+          style={{width:31/3, height:58/3, zIndex:100, marginLeft:30}}/>
       </TouchableOpacity>
             <View>
               <Text numberOfLines={2} style={[styles.HOME, {color:'white', width:width-100}]}>

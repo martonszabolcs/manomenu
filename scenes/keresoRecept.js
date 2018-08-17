@@ -140,9 +140,11 @@ export default class Bevasarlas extends Component<{}> {
     return (
       <TouchableOpacity
         onPress={() => {
+          if (this.state.selectedTag.length <= 1){
           this.setState(previousState => ({
             selectedTag: [...previousState.selectedTag, item]
           }));
+        }
         }}
         style={{
           height: 40,
@@ -627,7 +629,7 @@ export default class Bevasarlas extends Component<{}> {
           >
             <TouchableOpacity
               onPress={() => {
-                Actions.home();
+                Actions.pop();
               }}
             >
               <Image
@@ -636,6 +638,7 @@ export default class Bevasarlas extends Component<{}> {
                   width: 31 / 3,
                   height: 58 / 3,
                   zIndex: 100,
+                  marginLeft:20,
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10
                 }}
@@ -670,6 +673,10 @@ export default class Bevasarlas extends Component<{}> {
           style={{
                     transform: [{ scale: buttonScale }]
                 }}>*/}
+                <Text style={{ textAlign: "center", color:"white" }}>
+              {" "}
+              Az alsó fehér sávban kattintással tudod törölni a kiválasztott hozzávalót!{" "}
+            </Text>
 
           <ListView
             dataSource={this.dataSource.cloneWithRows(this.state.data)}

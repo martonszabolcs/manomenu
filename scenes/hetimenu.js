@@ -649,7 +649,7 @@ modalVisible2(visible) {
 
     for (var i = 0; i < list.length; i++) {
       if (this.state.menus[i].nap == 0 && this.state.menus[i].etkezes == 0) {
-        for (var z = 0; z < this.state.menus[i].tag.length; z++) {
+         for (var z = 0; z < this.state.menus[i].tag.length; z++) {
           console.log(this.state.menus[i].tag[z].name);
           newArrayForm = {
             title: this.state.menus[i].tag[z].name,
@@ -1856,8 +1856,48 @@ modalVisible2(visible) {
   hetfoiBev.push(this.state.hetfoiDesszert)
   this.setState({ hetfoiBev: hetfoiBev })*/
     }
+    this.deleteDuplicated()
   }
 
+  deleteDuplicated(){
+    var hetfo = this.state.hetfoiBev
+    var hlista = [...new Set(hetfo.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    var kedd = this.state.keddiBev
+    var klista = [...new Set(kedd.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    var szerda = this.state.szerdaiBev
+    var szlista = [...new Set(szerda.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    var csutortok = this.state.csutortokiBev
+    var cslista = [...new Set(csutortok.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    var pentek = this.state.pentekiBev
+    var plista = [...new Set(pentek.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    var szombat = this.state.szombatiBev
+    var szolista = [...new Set(szombat.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    ); 
+    var vasarnap = this.state.vasarnapiBev
+    var vlista = [...new Set(vasarnap.map(o => JSON.stringify(o)))].map(s =>
+      JSON.parse(s)
+    );
+    this.setState({
+      hetfoiBev: hlista,
+      keddiBev: klista,
+      szerdaiBev: szlista,
+      csutortokiBev: cslista,
+      pentekiBev: plista,
+      szombatiBev: szolista,
+      vasarnapiBev: vlista
+    })
+  }
   componentWillMount() {
     /*  api.getMessage().then((message) => {
       this.setState({
@@ -1931,22 +1971,33 @@ modalVisible2(visible) {
         if (list[i].tag.length > 0){
           console.log('van a listának tagje')
         this.setState({currentEtelID:list[i].id, szoveg:"Törlés", szin:"#EFD78B"})
+    this.setState({modalVisible2: true})
+     break;
+
 
       } else {
           console.log('nincs a listának tagje')
 
-        this.setState({szoveg:"Szerkesztés", szin:"#FFFFFF", currentEtelID:undefined,})
+        this.setState({szoveg:"Törlés", szin:"#FFFFFF"})
+    this.setState({modalVisible: true})
+
+
          
       }
 
     } else {
       console.log("nincs egyezés a listval")
+      console.log(this.state.modalVisible)
+    this.setState({modalVisible: false})
+    setTimeout(() => {
+    this.setState({modalVisible: true})
+
+    },200)
         //this.setState({szoveg:"Szerkesztés", szin:"#FFFFFF", currentEtelID:undefined,})
 
     } 
 
   }
-    this.setState({modalVisible2: true})
 
   }
 
@@ -1964,13 +2015,10 @@ modalVisible2(visible) {
       if (list[i].etkezes == this.state.etkezesNapszak && list[i].nap == this.state.etkezesNap) {
         // ha egyeznek az ID-k, akkor azt az elemet toroljuk
         list.splice(i, 1);
-        setTimeout(() => {
-        this.setState({modalVisible: true})
-
-        },200)
+        
       } else {
         console.log('egyébként ugrik fel')
-        this.setState({modalVisible: true})
+        this.setState({modalVisible: false})
       }
     }
     }
@@ -1984,6 +2032,21 @@ modalVisible2(visible) {
   }
 
   saveNewItem() {
+    var list = this.state.menus
+    console.log(this.state.etkezesNap)
+    console.log(this.state.etkezesNapszak)
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].etkezes == this.state.etkezesNapszak && list[i].nap == this.state.etkezesNap){
+        console.log("van ilyen étel már")
+        list[i] = {nev: this.state.ujcim,  etkezes: this.state.etkezesNapszak,
+      nap: this.state.etkezesNap,
+      tag:{
+      } }
+      setTimeout(() => {
+      this.saveMenu(list);
+    }, 200);
+      } else {
+        console.log("nincs ilyen étel")
     if (this.state.ujcim == ""){
     this.modalVisible(false);
 
@@ -1995,17 +2058,20 @@ modalVisible2(visible) {
       tag:{
       }
     };
+  }
+
     console.log(newArrayForm);
     var lists = this.state.menus.concat(newArrayForm);
 
     setTimeout(() => {
       this.saveMenu(lists);
     }, 200);
+    }
+  }
 
     this.setState({ ujcim: ""});
 
     this.modalVisible(false);
-  }
   }
 modal() {
     return (
@@ -2036,7 +2102,7 @@ modal() {
                 >
                   <TextInput
                     style={{ height: 40, width: width / 2 }}
-                    maxLength={10}
+                    maxLength={25}
                     placeholder="Új étel neve:"
                     onChangeText={ujcim => this.setState({ ujcim })}
                     value={this.state.ujcim}
@@ -2049,12 +2115,15 @@ modal() {
                 <TouchableOpacity
                   onPress={() => {
                     this.modalVisible(false);
+                    setTimeout(() => {
+                      this.deletee();
+                    },300)
                   }}
                 >
                   <View
                     style={[styles.modalButton, { backgroundColor: "white", height:height/10  }]}
                   >
-                    <Text style={{ color: "red" }}>{"Mégse"}</Text>
+                    <Text style={{ color: "red" }}>{"Törlés"}</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -2063,7 +2132,7 @@ modal() {
                   }}
                 >
                   <View style={[styles.modalButton, {height:height/10}]}>
-                    <Text style={{ color: "white" }}>{"Kész!"}</Text>
+                    <Text style={{ color: "white" }}>{"Kész"}</Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -2088,10 +2157,11 @@ modal() {
         >
           <View style={styles.modalBackground}>
             <View style={styles.modalContainer}>
-            <View style={{paddingTop: 0, flex:1, flexDirection:'row', justifyContent:'center'}}>
+            <View style={{paddingTop: 0, flex:1, borderRadius:10, flexDirection:'column', justifyContent:'center'}}>
               
                   <TouchableOpacity
                   onPress={() => {
+                    var id = this.state.currentEtelID;
                     console.log(this.state)
                     if (this.state.currentEtelID != undefined){
                     this.modalVisible2(false);
@@ -2101,13 +2171,15 @@ modal() {
                         currentEtelID: undefined
                     })
 
+                    setTimeout(() => {
+                    Actions.receptekHTML({tesztak: id})
 
-                    Actions.receptekHTML({tesztak: this.state.currentEtelID})
+                    },200)
                   }
                   }}
                 >
                   <View
-                    style={[styles.modalButton, { backgroundColor: this.state.szin }]}
+                    style={[styles.modalButton, { backgroundColor: this.state.szin, height:height/16, borderRadius:10, width: width / 1.6, marginTop:5 }]}
                   >
                     <Text style={{ color: "white", textAlign:'center' }}>{"Megtekintés"}</Text>
                   </View>
@@ -2128,11 +2200,10 @@ modal() {
                     },300)
                   }}
                 >
-                  <View style={styles.modalButton}>
+                  <View style={[styles.modalButton, {height:height/16, borderRadius:10, width: width / 1.6, marginTop:5}]}>
                     <Text style={{ color: "white", textAlign:'center' }}>{this.state.szoveg}</Text>
                   </View>
                 </TouchableOpacity>
-                  </View>
 
                  <TouchableOpacity
                   onPress={() => {
@@ -2146,11 +2217,12 @@ modal() {
                   }}
                 >
                   <View
-                    style={[styles.modalButton, { backgroundColor: "white",height:height/10 }]}
+                    style={[styles.modalButton, { backgroundColor: "white",height:height/16, borderRadius:10, width: width / 1.6, marginTop:5 }]}
                   >
                     <Text style={{ color: "#1DB7AB", textAlign:'center' }}>{"Mégse"}</Text>
                   </View>
                 </TouchableOpacity>
+              </View>
               </View>
             </View>
         </Modal>
@@ -2226,13 +2298,13 @@ modal() {
               borderRadius: 100
             }}
           >
-           {/* <TouchableOpacity onPress={() => this.saveList()}>
+            <TouchableOpacity onPress={() => this.saveList()}>
               <View style={{ backgroundColor: "white", borderRadius: 10 }}>
                 <Text style={[styles.HOME, { color: "#00B8AC" }]}>
                   {"Hozzávalók a bevásárlólistára!"}
                 </Text>
               </View>
-            </TouchableOpacity>*/}
+            </TouchableOpacity>
             <Text
               style={{ color: "#00b8ac", textAlign: "center", fontSize: 10 }}
             >
@@ -4743,6 +4815,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     height: width / 2,
     width: width / 1.5,
+    borderRadius:10,
     backgroundColor: "white",
     alignItems: "center",
   },

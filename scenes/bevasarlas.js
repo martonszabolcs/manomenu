@@ -341,7 +341,7 @@ export default class Bevasarlas extends Component<{}> {
  ` + string;
     let options = {
       html, // HTML String
-      fileName: "Bevásárlólista",
+      fileName: "ManóMenü Bevásárlólista",
       directory: "docs",
       height: 800,
       width: 1056,

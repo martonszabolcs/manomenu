@@ -367,6 +367,15 @@ export default class Profil extends Component<{}> {
               }}
             />
           </View>
+          <TouchableOpacity onPress={() => this.validate()}>
+            <View style={{width:width-40, height: 40, borderRadius:10, marginLeft:20, marginTop:20, marginRight:20, backgroundColor:"#1DB7AB", justifyContent:'center', alignItems:'center'}}>
+              <Text style = {{ color:"white", fontSize:30, 
+            fontFamily: "AmaticSC-Bold"
+            }}>
+              Mentés
+            </Text>
+            </View>
+          </TouchableOpacity>
         </KeyboardAwareScrollView>
 
         <View style={[styles.menu, { width: width, height: height / 12 }]}>
