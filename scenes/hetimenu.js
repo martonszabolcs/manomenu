@@ -238,7 +238,7 @@ modalVisible2(visible) {
     }, 1);
     setTimeout(() => {
       this.vasarnapiDesszert();
-    }, 1);
+    }, 200);
   }
 
   async _updateListMenu() {
@@ -1855,8 +1855,9 @@ modalVisible2(visible) {
       /*var hetfoiBev = this}.state.hetfoiBev.slice()
   hetfoiBev.push(this.state.hetfoiDesszert)
   this.setState({ hetfoiBev: hetfoiBev })*/
+    this.deleteDuplicated();
+
     }
-    this.deleteDuplicated()
   }
 
   deleteDuplicated(){
@@ -1979,7 +1980,7 @@ modalVisible2(visible) {
           console.log('nincs a listának tagje')
 
         this.setState({szoveg:"Törlés", szin:"#FFFFFF"})
-    this.setState({modalVisible: true})
+    this.setState({modalVisible2: true})
 
 
          
@@ -1988,9 +1989,9 @@ modalVisible2(visible) {
     } else {
       console.log("nincs egyezés a listval")
       console.log(this.state.modalVisible)
-    this.setState({modalVisible: false})
+    this.setState({modalVisible2: false})
     setTimeout(() => {
-    this.setState({modalVisible: true})
+    this.setState({modalVisible2: true})
 
     },200)
         //this.setState({szoveg:"Szerkesztés", szin:"#FFFFFF", currentEtelID:undefined,})
@@ -2086,6 +2087,29 @@ modal() {
         >
           <View style={styles.modalBackground}>
             <View style={styles.modalContainer}>
+              
+            </View>
+          </View>
+        </Modal>
+      </View>
+    );
+  }
+
+ 
+  modal2() {
+    return (
+      <View style={{ marginTop: 0 }}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={this.state.modalVisible2}
+          onRequestClose={() => {
+            console.log("Modal has been closed.");
+          }}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+            <View style={{paddingTop: 0, flex:1, borderRadius:10, flexDirection:'column', justifyContent:'center'}}>
               <View
                 style={{
                   justifyContent: "center",
@@ -2110,55 +2134,28 @@ modal() {
                 </View>
               </View>
               <View
-                style={{ flexDirection: "row", justifyContent: "space-around" }}
+                style={{ flexDirection: "row", justifyContent: "space-around", marginBottom:30 }}
               >
+                
                 <TouchableOpacity
                   onPress={() => {
-                    this.modalVisible(false);
-                    setTimeout(() => {
-                      this.deletee();
-                    },300)
-                  }}
-                >
-                  <View
-                    style={[styles.modalButton, { backgroundColor: "white", height:height/10  }]}
-                  >
-                    <Text style={{ color: "red" }}>{"Törlés"}</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
+                    if (this.state.ujcim != ""){
                     this.saveNewItem();
+                    this.modalVisible2(false);
+
+                  } else {
+                    alert("Írd be az étel nevét")
+                  }
                   }}
                 >
-                  <View style={[styles.modalButton, {height:height/10}]}>
+                  <View style={[styles.modalButton, {height:height/16, borderRadius:10, width:width/1.6}]}>
                     <Text style={{ color: "white" }}>{"Kész"}</Text>
                   </View>
                 </TouchableOpacity>
               </View>
-            </View>
-          </View>
-        </Modal>
-      </View>
-    );
-  }
+              <View style={{backgroundColor:'gray', width:width/1.6, height:1}}/>
 
- 
-  modal2() {
-    return (
-      <View style={{ marginTop: 0 }}>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.modalVisible2}
-          onRequestClose={() => {
-            console.log("Modal has been closed.");
-          }}
-        >
-          <View style={styles.modalBackground}>
-            <View style={styles.modalContainer}>
-            <View style={{paddingTop: 0, flex:1, borderRadius:10, flexDirection:'column', justifyContent:'center'}}>
-              
+              <View style={{justifyContent:'center', alignItems:'center'}}>
                   <TouchableOpacity
                   onPress={() => {
                     var id = this.state.currentEtelID;
@@ -2200,8 +2197,8 @@ modal() {
                     },300)
                   }}
                 >
-                  <View style={[styles.modalButton, {height:height/16, borderRadius:10, width: width / 1.6, marginTop:5}]}>
-                    <Text style={{ color: "white", textAlign:'center' }}>{this.state.szoveg}</Text>
+                  <View style={[styles.modalButton, {height:height/16, backgroundColor:'#FC5461', borderRadius:10, width: width / 1.6, marginTop:5}]}>
+                    <Text style={{ color: "white", textAlign:'center' }}>Törlés</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -2224,6 +2221,7 @@ modal() {
                 </TouchableOpacity>
               </View>
               </View>
+            </View>
             </View>
         </Modal>
       </View>
@@ -4813,7 +4811,7 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    height: width / 2,
+    height: width,
     width: width / 1.5,
     borderRadius:10,
     backgroundColor: "white",
@@ -4823,7 +4821,7 @@ const styles = StyleSheet.create({
   modalButton: {
     height: height/6,
     backgroundColor: "#00B8AC",
-    width: width / 3,
+    width: width / 4,
     justifyContent: "center",
     alignItems: "center"
   },

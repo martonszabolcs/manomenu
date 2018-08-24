@@ -240,6 +240,40 @@ export default class Profil extends Component<{}> {
             padding: 20
           }}
         >
+        <View
+          style={{
+            width: width,
+            height: height / 15,
+            backgroundColor: "#00b8ac",
+            flexDirection: "row",
+            top:0,
+            paddingLeft:10,
+            position:'absolute',
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            paddingBottom: 10
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.pop()}>
+            <View>
+              <Image
+                source={require("../src/nyil_feher.png")}
+                style={{
+                  width: 31 / 3,
+                  height: 58 / 3,
+                  zIndex: 2312321312,
+                  left: 10
+                }}
+              />
+            </View>
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.HOME}>{" "}</Text>
+          </View>
+          <View
+            style={{ width: 31 / 3, height: 58 / 3, zIndex: 100, left: 10 }}
+          />
+        </View>
           <Text style={[styles.cim, { backgroundColor: "transparent" }]}>
             A CERUZÁRA KATTINTVA MEG TUDOD ADNI A BABA ADATAIT!
           </Text>

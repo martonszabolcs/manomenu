@@ -42,6 +42,8 @@
 		90C5D9903C486494C1AC83F7 /* libPods-manomenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506E998DB46E24B4D02F72BD /* libPods-manomenu.a */; };
 		A90B7C200B40424FA9A8A5DC /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C33EC8695D6F4EF9B4CBD7AD /* libRCTOneSignal.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		EE622BA9212F7F5E001045D8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE622BA8212F7F5E001045D8 /* UIKit.framework */; };
+		EE622BAB212F7F64001045D8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE622BAA212F7F64001045D8 /* SystemConfiguration.framework */; };
 		EE95EA8121092B9E00632B68 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE95EA8021092B9E00632B68 /* Images-2.xcassets */; };
 		EECB721E21053B2F0060D2C5 /* AmaticSC-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE7C5FBA210524C500D89C89 /* AmaticSC-Bold.ttf */; };
 		EECB721F21053B2F0060D2C5 /* AmaticSC-Regular_1.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE7C5FBE210524C500D89C89 /* AmaticSC-Regular_1.ttf */; };
@@ -412,6 +414,8 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C33EC8695D6F4EF9B4CBD7AD /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		D5F05EE9EF5D4CEC93776F93 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
+		EE622BA8212F7F5E001045D8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EE622BAA212F7F64001045D8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EE7C5FB1210524C300D89C89 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		EE7C5FB2210524C400D89C89 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		EE7C5FB3210524C400D89C89 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
@@ -445,6 +449,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE622BAB212F7F64001045D8 /* SystemConfiguration.framework in Frameworks */,
+				EE622BA9212F7F5E001045D8 /* UIKit.framework in Frameworks */,
 				EECB722E21053B940060D2C5 /* libRCTAnimation.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -628,6 +634,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE622BAA212F7F64001045D8 /* SystemConfiguration.framework */,
+				EE622BA8212F7F5E001045D8 /* UIKit.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				506E998DB46E24B4D02F72BD /* libPods-manomenu.a */,
 			);

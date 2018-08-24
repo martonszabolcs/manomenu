@@ -221,7 +221,7 @@ export default class Profil extends Component<{}> {
             alignItems: "center"
           }}
         >
-          <TouchableOpacity onPress={() => this.goBack()}>
+          <TouchableOpacity onPress={() => Actions.pop()}>
             <View
               style={{
                 width: height / 15,
@@ -236,7 +236,7 @@ export default class Profil extends Component<{}> {
                   width: 31 / 3,
                   height: 58 / 3,
                   zIndex: 2312132321312,
-                  marginLeft: 10
+                  left: 10
                 }}
               />
             </View>

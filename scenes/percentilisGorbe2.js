@@ -265,7 +265,7 @@ export default class Perc extends React.Component {
       this.state.sulyi
     )
 
-    if (this.state.magassagi != "" && this.state.honapi && this.state.sulyi != ""){
+    if (this.state.magassagi != ""  && this.state.sulyi != ""){
 
     if (this.state.gender == "lany") {
         console.log("gLength")
@@ -317,7 +317,7 @@ export default class Perc extends React.Component {
     lista[honap] = {magassag: Number(this.state.magassagi),
       suly: Number(this.state.sulyi),
       honap: Number(this.state.honapi),
-      date: Number(this.state.datei)}
+      date: this.state.datei}
 
     
     setTimeout(() => {
@@ -342,10 +342,10 @@ export default class Perc extends React.Component {
     }, 200);
 
     this.setState({
-      magassag: "",
-      suly: "",
+      magassagi: "",
+      sulyi: "",
       honap: "",
-      date: ""
+      datei: ""
     });
 
     this.modalVisible2(false);
@@ -424,10 +424,10 @@ export default class Perc extends React.Component {
     }, 200);
 
     this.setState({
-      magassag: "",
-      suly: "",
+      magassagi: "",
+      sulyi: "",
       honap: "",
-      date: ""
+      datei: ""
     });
 
     this.modalVisible2(false);
@@ -623,6 +623,18 @@ export default class Perc extends React.Component {
                 </View>
                 <View style={{ height: 200 }} />
               </ScrollView>
+                <View style={{ justifyContent:"space-around", alignItems:'center', flexDirection:'row', paddingBottom:10  }}>
+                 <TouchableOpacity
+                  onPress={() => {
+                    this.modalVisible2(false);
+                  }}
+                >
+                  <View
+                    style={[styles.modalButton, { backgroundColor: "#FFEAA7", borderRadius:10 }]}
+                  >
+                    <Text style={{ color: "#00B8AC" }}>{"Mégse"}</Text>
+                  </View>
+                </TouchableOpacity>
               <TouchableOpacity
                   onPress={() => {
                     this.setState({
@@ -639,39 +651,28 @@ export default class Perc extends React.Component {
                   }}
                 >
                   <View
-                    style={[styles.modalButton, { backgroundColor: "white" }]}
+                    style={[styles.modalButton, { backgroundColor: "#D77179", borderRadius:10 }]}
+                   
                   >
-                    <Text style={{ color: "#00B8AC" }}>{"Adatok törlése!"}</Text>
+                    <Text style={{ color: "white" }}>{"Törlés"}</Text>
                   </View>
                 </TouchableOpacity>
-              <View
-                style={{ flexDirection: "row", justifyContent: "space-around" }}
-              >
-                <TouchableOpacity
-                  onPress={() => {
-                    this.modalVisible2(false);
-                  }}
-                >
-                  <View
-                    style={[styles.modalButton, { backgroundColor: "white" }]}
-                  >
-                    <Text style={{ color: "red" }}>{"Mégse"}</Text>
-                  </View>
-                </TouchableOpacity>
+              
+               
                 <TouchableOpacity
                   onPress={() => {
                     this.saveNewItem();
                   }}
                 >
                   <View
-                    style={[styles.modalButton, { backgroundColor: "white" }]}
+                    style={[styles.modalButton, { backgroundColor: "#00B8AC", borderRadius:10 }]}
                   >
-                    <Text style={{ color: "#00B8AC" }}>{"Kész!"}</Text>
+                    <Text style={{ color: "white" }}>{"Kész"}</Text>
                   </View>
                 </TouchableOpacity>
               </View>
             </View>
-          </View>
+            </View>
         </Modal>
       </View>
     );
@@ -1572,7 +1573,7 @@ const styles = StyleSheet.create({
   modalButton: {
     height: 40,
     backgroundColor: "#00B8AC",
-    width: width / 3,
+    width: width / 5,
     justifyContent: "center",
     alignItems: "center"
   },

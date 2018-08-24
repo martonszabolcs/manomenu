@@ -324,6 +324,7 @@ export default class ReceptekHTML extends Component<{}> {
                 width: height / 15,
                 height: height / 15,
                 justifyContent: "center",
+                paddingLeft:10,
                 alignItems: "center"
               }}
             >

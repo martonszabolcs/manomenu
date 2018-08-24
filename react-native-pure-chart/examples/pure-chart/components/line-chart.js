@@ -161,7 +161,6 @@ class LineChart extends React.Component {
   }
 
  drawPoint (index, point, seriesColor) {
-  console.log(point)
     let key = 'point' + index
     let size = 0
     let color = !seriesColor ? this.props.primaryColor : seriesColor
@@ -175,7 +174,6 @@ class LineChart extends React.Component {
 
     if (point.isEmpty) return null
       if (point.y != 0){
-        console.log(point.y)
     return (
       <TouchableWithoutFeedback key={key} onPress={() => {
         this.setState({selectedIndex: index})
@@ -359,7 +357,7 @@ class LineChart extends React.Component {
                         alignItems: 'flex-end',
                         height: '100%',
                         position: index === 0 ? 'relative' : 'absolute',
-                        minWidth: 200,
+                        minWidth: 300,
                         marginBottom: this.props.minValue && this.state.guideArray && this.state.guideArray.length > 0 ? -1 * this.state.guideArray[0][2] * this.props.minValue : null
                       }} >
                         {this.drawCoordinates(obj.data, obj.seriesColor, index)}

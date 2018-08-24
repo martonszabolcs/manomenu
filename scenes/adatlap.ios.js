@@ -211,12 +211,13 @@ export default class Profil extends Component<{}> {
             height: height / 15,
             backgroundColor: "#00b8ac",
             flexDirection: "row",
+            paddingLeft:10,
             justifyContent: "space-between",
             alignItems: "flex-end",
             paddingBottom: 10
           }}
         >
-          <TouchableOpacity onPress={() => this.validate()}>
+          <TouchableOpacity onPress={() => Actions.pop()}>
             <View>
               <Image
                 source={require("../src/nyil_feher.png")}

@@ -209,6 +209,27 @@ export default class Profil extends Component<{}> {
 
     if (this.state.addedData == null) {
       return (
+        <View style={{flex:1}}>
+         <View
+          style={{
+            width: width,
+            height: height / 15,
+            backgroundColor: "#00b8ac",
+            flexDirection: "row",
+            paddingLeft:20,
+            alignItems:'center'
+          }}
+        >
+          <TouchableOpacity onPress={() => Actions.pop()}>
+              <Image
+                source={require("../src/nyil_feher.png")}
+                style={{
+                  width: 31 / 3,
+                  height: 58 / 3,
+                }}
+              />
+          </TouchableOpacity>
+        </View>
         <View
           style={{
             backgroundColor: "#00b8ac",
@@ -218,6 +239,7 @@ export default class Profil extends Component<{}> {
             padding: 20
           }}
         >
+        
           <Text style={[styles.cim, { backgroundColor: "transparent" }]}>
             A CERUZÁRA KATTINTVA MEG TUDOD ADNI A BABA ADATAIT!
           </Text>
@@ -240,6 +262,7 @@ export default class Profil extends Component<{}> {
               />
             </View>
           </TouchableOpacity>
+        </View>
         </View>
       );
     } else {

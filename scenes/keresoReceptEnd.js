@@ -622,7 +622,7 @@ export default class Bevasarlas extends Component<{}> {
               justifyContent: "space-between",
               flexDirection: "row",
               paddingRight: 20,
-              paddingLeft: 20
+              paddingLeft: 40
             }}
           >
             <TouchableOpacity
