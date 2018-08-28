@@ -247,11 +247,9 @@ export default class Profil extends Component<{}> {
             backgroundColor: "#00b8ac",
             flexDirection: "row",
             top:0,
-            paddingLeft:10,
             position:'absolute',
             justifyContent: "space-between",
             alignItems: "flex-end",
-            paddingBottom: 10
           }}
         >
           <TouchableOpacity onPress={() => Actions.pop()}>
@@ -262,7 +260,10 @@ export default class Profil extends Component<{}> {
                   width: 31 / 3,
                   height: 58 / 3,
                   zIndex: 2312321312,
-                  left: 10
+                  marginLeft:20,
+                  marginRight:20,
+                  marginTop:20,
+                  marginBottom:20,
                 }}
               />
             </View>

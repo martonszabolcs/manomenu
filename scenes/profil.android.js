@@ -216,7 +216,6 @@ export default class Profil extends Component<{}> {
             height: height / 15,
             backgroundColor: "#00b8ac",
             flexDirection: "row",
-            paddingLeft:20,
             alignItems:'center'
           }}
         >
@@ -226,6 +225,10 @@ export default class Profil extends Component<{}> {
                 style={{
                   width: 31 / 3,
                   height: 58 / 3,
+                  marginLeft:20,
+                  marginRight:20,
+                  marginTop:20,
+                  marginBottom:20,
                 }}
               />
           </TouchableOpacity>
@@ -305,7 +308,10 @@ export default class Profil extends Component<{}> {
                     width: 31 / 3,
                     height: 58 / 3,
                     zIndex: 2312132321312,
-                    marginLeft: 10
+                    marginLeft:20,
+                  marginRight:20,
+                  marginTop:20,
+                  marginBottom:20,
                   }}
                 />
               </View>

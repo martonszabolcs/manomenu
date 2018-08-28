@@ -828,6 +828,10 @@ export default class ReceptekHTML extends Component<{}> {
                 style={{
                   width: 31 / 3,
                   height: 58 / 3,
+                  marginLeft:20,
+                  marginRight:20,
+                  marginTop:20,
+                  marginBottom:20,
                   zIndex: 2312132321312,
                   marginLeft: 10
                 }}

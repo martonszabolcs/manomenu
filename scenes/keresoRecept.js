@@ -639,6 +639,9 @@ export default class Bevasarlas extends Component<{}> {
                   height: 58 / 3,
                   zIndex: 100,
                   marginLeft:20,
+                  marginRight:20,
+                  marginTop:20,
+                  marginBottom:20,
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10
                 }}
