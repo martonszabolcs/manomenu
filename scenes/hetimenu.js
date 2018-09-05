@@ -1962,6 +1962,7 @@ modalVisible2(visible) {
     this.setState({etkezesNap: etkezes[1], etkezesNapszak: etkezes[0]})
     console.log(this.state.menus)
     var list = this.state.menus;
+    if (list.length > 0){
 
     for (var i = 0; i < list.length; i++) {
       console.log(this.state)
@@ -1998,6 +1999,10 @@ modalVisible2(visible) {
 
     } 
 
+  }  
+  } else {
+    this.setState({szoveg:"Törlés", szin:"#FFFFFF"})
+    this.setState({modalVisible2: true})
   }
 
   }
@@ -2036,6 +2041,7 @@ modalVisible2(visible) {
     var list = this.state.menus
     console.log(this.state.etkezesNap)
     console.log(this.state.etkezesNapszak)
+    if (list.length > 0){
     for (var i = 0; i < list.length; i++) {
       if (list[i].etkezes == this.state.etkezesNapszak && list[i].nap == this.state.etkezesNap){
         console.log("van ilyen étel már")
@@ -2069,6 +2075,23 @@ modalVisible2(visible) {
     }, 200);
     }
   }
+} else {
+  var newArrayForm = {
+    nev: this.state.ujcim,
+    etkezes: this.state.etkezesNapszak,
+    nap: this.state.etkezesNap,
+    tag:{
+    }
+  };
+
+  console.log(newArrayForm);
+  var lists = this.state.menus.concat(newArrayForm);
+
+  setTimeout(() => {
+    this.saveMenu(lists);
+  }, 200);
+}
+
 
     this.setState({ ujcim: ""});
 
