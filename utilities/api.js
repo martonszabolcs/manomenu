@@ -574,6 +574,15 @@ var api = {
         "X-SA-DEVICE-TOKEN": tokenLe
       }
     }).then(haadolgok => haadolgok.json());
+  },
+  gettudtad() {
+    return fetch("http://46.101.62.53/Apps/rest/content/10/list?category=93", {
+      headers: {
+        accept: "application/json",
+        AppId: "3",
+        "X-SA-DEVICE-TOKEN": tokenLe
+      }
+    }).then(tudtad => tudtad.json());
   }
 };
 module.exports = api;

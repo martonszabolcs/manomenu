@@ -72,6 +72,7 @@ import valaszto from "./scenes/valaszto";
 import profil2 from "./scenes/profil2";
 import percentilisGorbe2 from "./scenes/percentilisGorbe2";
 import szakemberHTML from "./scenes/szakemberHTML";
+import tudtad from "./scenes/tudtad";
 //import * as CacheManager from 'react-native-http-cache';
 
 export default class Flux extends Component {
@@ -190,6 +191,13 @@ export default class Flux extends Component {
               key="szakemberHTML"
               component={szakemberHTML}
               title="szakemberHTML"
+              onRight={() => {
+              }}
+            />
+            <Scene
+              key="tudtad"
+              component={tudtad}
+              title="tudtad"
               onRight={() => {
               }}
             />

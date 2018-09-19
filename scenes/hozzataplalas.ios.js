@@ -284,17 +284,41 @@ export default class Hozzataplalas extends Component<{}> {
               </Text>
             </View>
           </TouchableOpacity>
-          <View
-            style={{
-              width: height / 4,
-              height: height / 4,
-              margin: 5,
-              backgroundColor: "transparent",
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 10
-            }}
-          />
+          <TouchableOpacity onPress={() => Actions.tudtad()}>
+            <View
+              style={{
+                width: height / 4,
+                height: height / 4,
+                margin: 5,
+                backgroundColor: "#00b8ac",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 10
+              }}
+            >
+              <Image
+                source={require("../src/hozzataplalas/hozzatapl_mielott2.png")}
+                style={{
+                  width: height / 4,
+                  height: height / 4,
+                  borderRadius: 10,
+                  zIndex: 500
+                }}
+              />
+              <Text
+                style={[
+                  styles.cim,
+                  {
+                    position: "absolute",
+                    backgroundColor: "transparent",
+                    zIndex: 324235
+                  }
+                ]}
+              >
+                {"TUDTAD?"}
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
 
         <View style={[styles.menu, { width: width, height: height / 12 }]}>
