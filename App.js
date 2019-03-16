@@ -142,6 +142,7 @@ export default class Flux extends Component {
   }
 
    async onOpened(openResult) {
+    Actions.home();
     console.log(openResult)
     var title = openResult.notification.payload.title
     var body = openResult.notification.payload.body

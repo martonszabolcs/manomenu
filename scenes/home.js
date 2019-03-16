@@ -1677,7 +1677,7 @@ export default class Home extends Component<{}> {
   }
 
   componentDidMount() {
-        AppState.addEventListener('change', this._handleAppStateChange);
+    AppState.addEventListener('change', this._handleAppStateChange);
 
     this.lekeres();
       
@@ -1763,11 +1763,18 @@ export default class Home extends Component<{}> {
       if (this.state.title != "" && this.state.body != ""){
         Alert.alert(this.state.title, this.state.body)
         this.setState({body:"", title:""})
+        this.that();
+        
     }
     },4000)
     }
     this.setState({appState: nextAppState});
   };
+
+  async that(){
+    await AsyncStorage.setItem("body", "");
+    await AsyncStorage.setItem("title", "");
+  }
 
   async loadAlert() {
     try {
