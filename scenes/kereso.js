@@ -97,7 +97,11 @@ export default class Bevasarlas extends Component<{}> {
     return (
       <TouchableOpacity
         onPress={() => {
-          Actions.cikkekHTML({ tesztak: item.id });
+          if (item.type.name == "Cikkek"){
+            Actions.cikkekHTML({ tesztak: item.id });
+          } else {
+            Actions.receptekHTML({ tesztak: item.id });
+        }
         }}
         style={{
           height: rowHeight,

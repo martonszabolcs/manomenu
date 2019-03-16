@@ -9,12 +9,14 @@ import {
   StatusBar,
   ScrollView,
   Image,
+  Alert,
   Modal,
   Switch,
   TouchableOpacity,
   Linking,
   WebView,
   ListView,
+  AppState,
   AsyncStorage,
   BackHandler,
   Button
@@ -22,7 +24,6 @@ import {
 
 //import Firsttime from './firsttime';
 
-import OneSignal from "react-native-onesignal"; // Import package from node modules
 
 import api from "../utilities/api";
 import { Actions } from "react-native-router-flux";
@@ -43,12 +44,14 @@ export default class Home extends Component<{}> {
       tesztak: "",
       cacheSize: "",
       unit: "",
-      token: ""
+      token: "",
+      title:"",
+      body:"",
+    appState: AppState.currentState,
     };
-    this.onIds = this.onIds.bind(this);
-      OneSignal.init("8cb76a3c-7f85-40f1-adf2-1974edc46b0c");
 
     Actions.reset("home");
+
 
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1.guid != r2.guid
@@ -1669,10 +1672,15 @@ export default class Home extends Component<{}> {
     }
   }
 
-  componentDidMount() {
-    this.lekeres();
+  componentDidUpdate(){
+    console.log("upd")
+  }
 
-    OneSignal.configure({});
+  componentDidMount() {
+        AppState.addEventListener('change', this._handleAppStateChange);
+
+    this.lekeres();
+      
     Linking.getInitialURL()
       .then(url => {
         if (url) {
@@ -1733,50 +1741,59 @@ export default class Home extends Component<{}> {
   }
 
   componentWillMount() {
-    api.token();
-    OneSignal.addEventListener("received", this.onReceived);
-    OneSignal.addEventListener("opened", this.onOpened);
-    OneSignal.addEventListener("ids", this.onIds);
+    api.token();     
     BackHandler.addEventListener("hardwareBackPress", this.backPressed);
   }
-  componentWillUnmount() {
-    OneSignal.removeEventListener("received", this.onReceived);
-    OneSignal.removeEventListener("opened", this.onOpened);
-    OneSignal.removeEventListener("ids", this.onIds);
-  }
+  componentWillUnMount() {
 
-  onReceived(notification) {
-    console.log("Notification received: ", notification);
-  }
+  AppState.removeEventListener('change', this._handleAppStateChange);
+  
+}
+ _handleAppStateChange = (nextAppState) => {
+    if (
+      this.state.appState.match(/inactive|background/) &&
+      nextAppState === 'active'
+    ) {
+        console.log('újra itt')
+      this.loadAlert();
+      this.loadAlert2();
+      setTimeout(() => {
+      console.log(this.state)
 
-  onOpened(openResult) {
-    console.log("Message: ", openResult.notification.payload.body);
-    console.log("Data: ", openResult.notification.payload.additionalData);
-    console.log("isActive: ", openResult.notification.isAppInFocus);
-    console.log("openResult: ", openResult);
-  }
+      if (this.state.title != "" && this.state.body != ""){
+        Alert.alert(this.state.title, this.state.body)
+        this.setState({body:"", title:""})
+    }
+    },4000)
+    }
+    this.setState({appState: nextAppState});
+  };
 
-  onIds(device) {
-    console.log("Device info: ", device);
-
-    var path = "http://46.101.62.53/Apps/rest/device/push/" + device.userId;
-    console.log(path);
-    fetch(path, {
-      headers: {
-        "Cache-Control": "no-cache",
-        Accept: "application/json",
-        Appid: "3"
-      },
-      method: "POST"
-    })
-      .then(response => response.json())
-      .then(responseData => {
-        this.tokenSave(responseData);
-      })
-      .catch(error => {
-        console.log(error);
+  async loadAlert() {
+    try {
+      var value = await AsyncStorage.getItem("title");
+      console.log(value)
+      this.setState({
+        title: value
       });
-  }
+    } catch (error) {
+      // Can't access data
+    }
+    }
+  async loadAlert2() {
+
+  try {
+      var value = await AsyncStorage.getItem("body");
+      console.log(value)
+      this.setState({
+        body: value
+      });
+    } catch (error) {
+      // Can't access data
+    }
+}
+
+  
 
   async tokenSave(responseData) {
     try {

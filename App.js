@@ -23,6 +23,7 @@ import {
 import { Router, Scene, Actions } from "react-native-router-flux";
 
 import SplashScreen from "react-native-smart-splash-screen";
+import OneSignal from "react-native-onesignal"; // Import package from node modules
 
 import home from "./scenes/home";
 import hozzataplalas from "./scenes/hozzataplalas";
@@ -80,6 +81,10 @@ export default class Flux extends Component {
     super(props);
     console.log("component created");
     this.state = {};
+    OneSignal.init("8cb76a3c-7f85-40f1-adf2-1974edc46b0c");
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
   }
   async reklam() {
     console.log("reklam");
@@ -126,7 +131,35 @@ export default class Flux extends Component {
     BackHandler.addEventListener("hardwareBackPress", this.backPressed);
   }
   componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
     BackHandler.removeEventListener("hardwareBackPress", this.backPressed);
+  }
+  async onReceived(notification) {
+    console.log(notification)
+    console.log("Notification received: ", notification);
+  }
+
+   async onOpened(openResult) {
+    console.log(openResult)
+    var title = openResult.notification.payload.title
+    var body = openResult.notification.payload.body
+    await AsyncStorage.setItem("body", body);
+    await AsyncStorage.setItem("title", title);
+    console.log("DSADASDASDS")
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
+
+
+  onIds(device) {
+    OneSignal.configure();
+    console.log(device)
+    console.log('Device info: ', device);
+    OneSignal.configure();
   }
 
   backPressed = () => {
